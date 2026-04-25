@@ -1,4 +1,4 @@
-import { computeSeedActions, SEED_BUSES } from './initial.seed';
+import { computeSeedActions, SEED_BUSES } from '../seeds/initial.seed';
 
 describe('computeSeedActions', () => {
   it('should return all buses to insert when no existing codes', () => {

@@ -2,7 +2,7 @@ import { of } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 import { ExecutionContext, CallHandler } from '@nestjs/common';
 import { SKIP_TRANSFORM_KEY } from '../decorators/skip-transform.decorator';
-import { TransformInterceptor } from './transform.interceptor';
+import { TransformInterceptor } from '../interceptors/transform.interceptor';
 
 describe('TransformInterceptor', () => {
   let interceptor: TransformInterceptor;

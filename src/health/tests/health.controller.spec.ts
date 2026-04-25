@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Reflector } from '@nestjs/core';
-import { HealthController } from './health.controller';
-import { HealthService } from './health.service';
-import { SKIP_TRANSFORM_KEY } from '../common/decorators/skip-transform.decorator';
+import { HealthController } from '../health.controller';
+import { HealthService } from '../health.service';
+import { SKIP_TRANSFORM_KEY } from '../../common/decorators/skip-transform.decorator';
 
 describe('HealthController', () => {
   let controller: HealthController;

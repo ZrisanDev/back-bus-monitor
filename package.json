@@ -73,7 +73,7 @@
       "ts"
     ],
     "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
+    "testMatch": ["**/tests/**/*.spec.ts"],
     "testPathIgnorePatterns": [
       "migrations\\.spec\\.ts$"
     ],

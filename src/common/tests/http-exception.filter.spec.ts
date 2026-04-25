@@ -4,7 +4,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { QueryFailedError } from 'typeorm';
-import { HttpExceptionFilter } from './http-exception.filter';
+import { HttpExceptionFilter } from '../filters/http-exception.filter';
 
 describe('HttpExceptionFilter', () => {
   let filter: HttpExceptionFilter;

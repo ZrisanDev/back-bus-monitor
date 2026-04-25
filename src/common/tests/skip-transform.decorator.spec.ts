@@ -1,5 +1,5 @@
 import { Reflector } from '@nestjs/core';
-import { SKIP_TRANSFORM_KEY, SkipTransform } from './skip-transform.decorator';
+import { SKIP_TRANSFORM_KEY, SkipTransform } from '../decorators/skip-transform.decorator';
 
 describe('SkipTransform Decorator', () => {
   let reflector: Reflector;

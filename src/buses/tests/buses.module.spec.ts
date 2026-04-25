@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { BusesModule } from './buses.module';
-import { BusesService } from './buses.service';
-import { BusesController } from './buses.controller';
-import { Bus } from './entities/bus.entity';
+import { BusesModule } from '../buses.module';
+import { BusesService } from '../buses.service';
+import { BusesController } from '../buses.controller';
+import { Bus } from '../entities/bus.entity';
 
 describe('BusesModule', () => {
   let module: any;

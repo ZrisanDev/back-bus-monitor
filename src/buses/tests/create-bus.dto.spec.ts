@@ -1,6 +1,6 @@
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
-import { CreateBusDto } from './create-bus.dto';
+import { CreateBusDto } from '../dto/create-bus.dto';
 
 describe('CreateBusDto', () => {
   // ── Helper to validate a DTO instance ──────────────────────────────────

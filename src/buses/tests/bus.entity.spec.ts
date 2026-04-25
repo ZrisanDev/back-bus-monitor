@@ -1,5 +1,5 @@
 import { getMetadataArgsStorage } from 'typeorm';
-import { Bus } from './bus.entity';
+import { Bus } from '../entities/bus.entity';
 
 describe('Bus Entity', () => {
   const getTable = () =>

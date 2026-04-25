@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BusesController } from './buses.controller';
-import { BusesService } from './buses.service';
-import { CreateBusDto } from './dto/create-bus.dto';
-import { Bus } from './entities/bus.entity';
+import { BusesController } from '../buses.controller';
+import { BusesService } from '../buses.service';
+import { CreateBusDto } from '../dto/create-bus.dto';
+import { Bus } from '../entities/bus.entity';
 
 describe('BusesController', () => {
   let controller: BusesController;

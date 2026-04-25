@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ConflictException, NotFoundException } from '@nestjs/common';
-import { BusesService } from './buses.service';
-import { Bus } from './entities/bus.entity';
-import { CreateBusDto } from './dto/create-bus.dto';
+import { BusesService } from '../buses.service';
+import { Bus } from '../entities/bus.entity';
+import { CreateBusDto } from '../dto/create-bus.dto';
 
 describe('BusesService', () => {
   let service: BusesService;
