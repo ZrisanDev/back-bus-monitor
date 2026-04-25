@@ -4,10 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  // OneToMany — Se restaura en Fase 5 (ReportsModule)
   Check,
 } from 'typeorm';
-import { Report } from '../../reports/entities/report.entity';
+// import { Report } from '../../reports/entities/report.entity'; — Fase 5
 
 @Entity('buses', { name: 'pk_buses' })
 export class Bus {
@@ -27,6 +27,6 @@ export class Bus {
   @UpdateDateColumn({ type: 'timestamptz', name: 'updated_at' })
   updated_at: Date;
 
-  @OneToMany(() => Report, (report) => report.bus)
-  reports: Report[];
+  // @OneToMany(() => Report, (report) => report.bus) — Se restaura en Fase 5
+  // reports: Report[];
 }

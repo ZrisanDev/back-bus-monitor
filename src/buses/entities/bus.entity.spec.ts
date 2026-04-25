@@ -65,12 +65,13 @@ describe('Bus Entity', () => {
     expect(updatedAt!.options.type).toBe('timestamptz');
   });
 
-  it('should have OneToMany relation to Report entity', () => {
-    const reportsRelation = getRelations().find(
-      (r) => r.propertyName === 'reports',
-    );
-    expect(reportsRelation).toBeDefined();
-    expect(reportsRelation!.relationType).toBe('one-to-many');
-    expect(reportsRelation!.inverseSideProperty).toBeDefined();
-  });
+  // OneToMany relation to Report — Se restaura en Fase 5 (ReportsModule)
+  // it('should have OneToMany relation to Report entity', () => {
+  //   const reportsRelation = getRelations().find(
+  //     (r) => r.propertyName === 'reports',
+  //   );
+  //   expect(reportsRelation).toBeDefined();
+  //   expect(reportsRelation!.relationType).toBe('one-to-many');
+  //   expect(reportsRelation!.inverseSideProperty).toBeDefined();
+  // });
 });
