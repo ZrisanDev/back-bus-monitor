@@ -33,5 +33,7 @@ export const AppDataSource = new DataSource({
     __dirname + '/010_create_bus_assignments.js',
     __dirname + '/011_add_route_stop_to_reports.js',
     __dirname + '/012_enforce_report_route_stop_not_null.js',
+    __dirname + '/013_add_lat_lng_to_reports.js',
+    __dirname + '/014_reconcile_reports_geo_constraints.js',
   ],
 });

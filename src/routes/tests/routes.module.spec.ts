@@ -4,6 +4,7 @@ import { RoutesModule } from '../routes.module';
 import { RoutesService } from '../routes.service';
 import { RoutesController } from '../routes.controller';
 import { Route } from '../entities/route.entity';
+import { RouteStop } from '../../route-stops/entities/route-stop.entity';
 
 describe('RoutesModule', () => {
   let module: any;
@@ -19,6 +20,10 @@ describe('RoutesModule', () => {
         create: jest.fn(),
         save: jest.fn(),
         remove: jest.fn(),
+      })
+      .overrideProvider(getRepositoryToken(RouteStop))
+      .useValue({
+        find: jest.fn(),
       })
       .compile();
   });

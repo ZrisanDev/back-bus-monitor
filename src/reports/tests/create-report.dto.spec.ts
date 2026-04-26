@@ -16,9 +16,11 @@ describe('CreateReportDto', () => {
 
   // ── SCN: Valid DTO passes validation ───────────────────────────────────
 
-  it('should pass validation with valid passenger_count', async () => {
+  it('should pass validation with valid passenger_count, latitude, longitude', async () => {
     const errors = await validateDto({
       passenger_count: 22,
+      latitude: -12.1294423,
+      longitude: -77.0228339,
     });
 
     expect(errors).toHaveLength(0);
@@ -29,6 +31,8 @@ describe('CreateReportDto', () => {
   it('should pass validation with zero passengers', async () => {
     const errors = await validateDto({
       passenger_count: 0,
+      latitude: -12.1294423,
+      longitude: -77.0228339,
     });
 
     expect(errors).toHaveLength(0);
@@ -81,6 +85,8 @@ describe('CreateReportDto', () => {
       passenger_count: 22,
       route_id: 10,
       stop_id: 20,
+      latitude: -12.1294423,
+      longitude: -77.0228339,
     });
 
     expect(errors).toHaveLength(0);
@@ -91,6 +97,8 @@ describe('CreateReportDto', () => {
   it('should pass validation without route_id and stop_id (nullable stage)', async () => {
     const errors = await validateDto({
       passenger_count: 22,
+      latitude: -12.1294423,
+      longitude: -77.0228339,
     });
 
     expect(errors).toHaveLength(0);
@@ -155,6 +163,164 @@ describe('CreateReportDto', () => {
       passenger_count: 50,
       route_id: 9999,
       stop_id: 8888,
+      latitude: -12.1294423,
+      longitude: -77.0228339,
+    });
+
+    expect(errors).toHaveLength(0);
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK-013: latitude and longitude required fields
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ── SCN: Valid DTO with latitude and longitude passes ──────────────────
+
+  it('should pass validation with passenger_count, route_id, stop_id, latitude, longitude', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      route_id: 10,
+      stop_id: 20,
+      latitude: -12.1294423,
+      longitude: -77.0228339,
+    });
+
+    expect(errors).toHaveLength(0);
+  });
+
+  // ── SCN: latitude is required ──────────────────────────────────────────
+
+  it('should fail when latitude is missing', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      route_id: 10,
+      stop_id: 20,
+      longitude: -77.0228339,
+    });
+
+    const latErrors = errors.find((e) => e.property === 'latitude');
+    expect(latErrors).toBeDefined();
+  });
+
+  // ── SCN: longitude is required ─────────────────────────────────────────
+
+  it('should fail when longitude is missing', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      route_id: 10,
+      stop_id: 20,
+      latitude: -12.1294423,
+    });
+
+    const lngErrors = errors.find((e) => e.property === 'longitude');
+    expect(lngErrors).toBeDefined();
+  });
+
+  // ── SCN: latitude must be a number ─────────────────────────────────────
+
+  it('should fail when latitude is not a number', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      route_id: 10,
+      stop_id: 20,
+      latitude: 'not-a-number',
+      longitude: -77.0228339,
+    });
+
+    const latErrors = errors.find((e) => e.property === 'latitude');
+    expect(latErrors).toBeDefined();
+    expect(latErrors!.constraints).toHaveProperty('isNumber');
+  });
+
+  // ── SCN: longitude must be a number ────────────────────────────────────
+
+  it('should fail when longitude is not a number', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      route_id: 10,
+      stop_id: 20,
+      latitude: -12.1294423,
+      longitude: 'bad',
+    });
+
+    const lngErrors = errors.find((e) => e.property === 'longitude');
+    expect(lngErrors).toBeDefined();
+    expect(lngErrors!.constraints).toHaveProperty('isNumber');
+  });
+
+  // ── SCN: latitude range validation — value below -90 ───────────────────
+
+  it('should fail when latitude is below -90', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      latitude: -91,
+      longitude: -77.0228339,
+    });
+
+    const latErrors = errors.find((e) => e.property === 'latitude');
+    expect(latErrors).toBeDefined();
+    expect(latErrors!.constraints).toHaveProperty('min');
+  });
+
+  // ── SCN: latitude range validation — value above 90 ────────────────────
+
+  it('should fail when latitude is above 90', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      latitude: 91,
+      longitude: -77.0228339,
+    });
+
+    const latErrors = errors.find((e) => e.property === 'latitude');
+    expect(latErrors).toBeDefined();
+    expect(latErrors!.constraints).toHaveProperty('max');
+  });
+
+  // ── SCN: longitude range validation — value below -180 ─────────────────
+
+  it('should fail when longitude is below -180', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      latitude: -12.1294423,
+      longitude: -181,
+    });
+
+    const lngErrors = errors.find((e) => e.property === 'longitude');
+    expect(lngErrors).toBeDefined();
+    expect(lngErrors!.constraints).toHaveProperty('min');
+  });
+
+  // ── SCN: longitude range validation — value above 180 ──────────────────
+
+  it('should fail when longitude is above 180', async () => {
+    const errors = await validateDto({
+      passenger_count: 22,
+      latitude: -12.1294423,
+      longitude: 181,
+    });
+
+    const lngErrors = errors.find((e) => e.property === 'longitude');
+    expect(lngErrors).toBeDefined();
+    expect(lngErrors!.constraints).toHaveProperty('max');
+  });
+
+  // ── SCN: Triangulation — valid boundary values pass ────────────────────
+
+  it('should pass with latitude at boundary -90 and longitude at boundary -180', async () => {
+    const errors = await validateDto({
+      passenger_count: 10,
+      latitude: -90,
+      longitude: -180,
+    });
+
+    expect(errors).toHaveLength(0);
+  });
+
+  it('should pass with latitude at boundary 90 and longitude at boundary 180', async () => {
+    const errors = await validateDto({
+      passenger_count: 10,
+      latitude: 90,
+      longitude: 180,
     });
 
     expect(errors).toHaveLength(0);

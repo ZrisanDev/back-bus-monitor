@@ -85,4 +85,42 @@ describe('HealthService', () => {
       new Date(after).getTime(),
     );
   });
+
+  // ── Kafka status (Task 3.3): KAFKA_ENABLED controls kafka field ────
+
+  describe('kafka status (killswitch)', () => {
+    it('should report kafka as "disabled" when KAFKA_ENABLED is false', async () => {
+      mockDataSource.query.mockResolvedValue([{ '?column?': 1 }]);
+      process.env.KAFKA_ENABLED = 'false';
+
+      const serviceWithKafka = new HealthService(mockDataSource as any);
+      const result = await serviceWithKafka.checkHealth();
+
+      expect(result).toHaveProperty('kafka', 'disabled');
+    });
+
+    it('should report kafka as "disabled" when KAFKA_ENABLED is absent', async () => {
+      mockDataSource.query.mockResolvedValue([{ '?column?': 1 }]);
+      delete process.env.KAFKA_ENABLED;
+
+      const serviceWithKafka = new HealthService(mockDataSource as any);
+      const result = await serviceWithKafka.checkHealth();
+
+      expect(result).toHaveProperty('kafka', 'disabled');
+    });
+
+    it('should report kafka as "enabled" when KAFKA_ENABLED is true', async () => {
+      mockDataSource.query.mockResolvedValue([{ '?column?': 1 }]);
+      process.env.KAFKA_ENABLED = 'true';
+
+      const serviceWithKafka = new HealthService(mockDataSource as any);
+      const result = await serviceWithKafka.checkHealth();
+
+      expect(result).toHaveProperty('kafka', 'enabled');
+    });
+
+    afterEach(() => {
+      delete process.env.KAFKA_ENABLED;
+    });
+  });
 });

@@ -151,4 +151,40 @@ describe('Report Entity', () => {
     expect(report.route_id).toBe(42);
     expect(report.stop_id).toBe(99);
   });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK-013: latitude and longitude columns
+  // ═══════════════════════════════════════════════════════════════════════
+
+  // ── SCN: Report has latitude and longitude fields ─────────────────────
+
+  it('should accept latitude and longitude fields', () => {
+    const report = new Report();
+    report.id = 1;
+    report.bus_id = 1;
+    report.passenger_count = 22;
+    report.route_id = 10;
+    report.stop_id = 20;
+    report.latitude = -12.1294423;
+    report.longitude = -77.0228339;
+
+    expect(report.latitude).toBe(-12.1294423);
+    expect(report.longitude).toBe(-77.0228339);
+  });
+
+  // ── SCN: Triangulation — different lat/lng values ─────────────────────
+
+  it('should accept different latitude and longitude values', () => {
+    const report = new Report();
+    report.id = 2;
+    report.bus_id = 2;
+    report.passenger_count = 15;
+    report.route_id = 5;
+    report.stop_id = 8;
+    report.latitude = -34.603722;
+    report.longitude = -58.381592;
+
+    expect(report.latitude).toBe(-34.603722);
+    expect(report.longitude).toBe(-58.381592);
+  });
 });

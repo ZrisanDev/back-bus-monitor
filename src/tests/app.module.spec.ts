@@ -11,6 +11,7 @@ import { RouteStopsModule } from '../route-stops/route-stops.module';
 import { HolidaysModule } from '../holidays/holidays.module';
 import { SchedulesModule } from '../schedules/schedules.module';
 import { BusAssignmentsModule } from '../bus-assignments/bus-assignments.module';
+import { SimulatorModule } from '../simulator/simulator.module';
 
 describe('AppModule', () => {
   // ── SCN: All feature modules are registered as imports ───────────────
@@ -30,6 +31,7 @@ describe('AppModule', () => {
       HolidaysModule,
       SchedulesModule,
       BusAssignmentsModule,
+      SimulatorModule,
     ];
 
     for (const RequiredModule of requiredModules) {
@@ -75,13 +77,14 @@ describe('AppModule', () => {
 
   // ── SCN: Total module count matches expected ─────────────────────────
 
-  it('should have exactly 13 module imports (2 dynamic + 11 class)', () => {
+  it('should have exactly 14 module imports (2 dynamic + 12 class)', () => {
     const imports = Reflect.getMetadata('imports', AppModule) as any[];
 
-    // 2 dynamic (ConfigModule.forRoot, DatabaseModule.forRoot) + 11 class = 13 total
+    // 2 dynamic (ConfigModule.forRoot, DatabaseModule.forRoot) + 12 class = 14 total
     // ConfigModule.forRoot({isGlobal:true}), DatabaseModule.forRoot(), HealthModule,
     // BusesModule, ReportsModule, DirectionsModule, RoutesModule, StopsModule,
-    // DayTypesModule, RouteStopsModule, HolidaysModule, SchedulesModule, BusAssignmentsModule
-    expect(imports).toHaveLength(13);
+    // DayTypesModule, RouteStopsModule, HolidaysModule, SchedulesModule,
+    // BusAssignmentsModule, SimulatorModule
+    expect(imports).toHaveLength(14);
   });
 });

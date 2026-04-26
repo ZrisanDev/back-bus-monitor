@@ -4,7 +4,12 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Route } from '../../routes/entities/route.entity';
+import { Stop } from '../../stops/entities/stop.entity';
+import { Direction } from '../../directions/entities/direction.entity';
 
 @Entity('route_stops')
 export class RouteStop {
@@ -28,4 +33,16 @@ export class RouteStop {
 
   @UpdateDateColumn({ type: 'timestamptz', name: 'updated_at' })
   updated_at: Date;
+
+  @ManyToOne(() => Route)
+  @JoinColumn({ name: 'route_id' })
+  route: Route;
+
+  @ManyToOne(() => Stop)
+  @JoinColumn({ name: 'stop_id' })
+  stop: Stop;
+
+  @ManyToOne(() => Direction)
+  @JoinColumn({ name: 'direction_id' })
+  direction: Direction;
 }

@@ -616,6 +616,162 @@ describe('ReportsService', () => {
   });
 
   // ═══════════════════════════════════════════════════════════════════════
+  // TASK 2.1: getLastStatusAll — with filter param passthrough
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('getLastStatusAll (with filter)', () => {
+    // ── SCN: Passes filter to LastStatusQueryService ─────────────────────
+
+    it('should pass filter parameter to lastStatusQueryService', async () => {
+      mockLastStatusQueryService.execute.mockResolvedValue([]);
+
+      await service.getLastStatusAll('full');
+
+      expect(mockLastStatusQueryService.execute).toHaveBeenCalledWith('full');
+    });
+
+    // ── SCN: No filter passes undefined ──────────────────────────────────
+
+    it('should pass undefined when no filter is provided', async () => {
+      mockLastStatusQueryService.execute.mockResolvedValue([]);
+
+      await service.getLastStatusAll();
+
+      expect(mockLastStatusQueryService.execute).toHaveBeenCalledWith(undefined);
+    });
+
+    // ── SCN: Triangulation — active filter ───────────────────────────────
+
+    it('should pass active filter correctly', async () => {
+      mockLastStatusQueryService.execute.mockResolvedValue([]);
+
+      await service.getLastStatusAll('active');
+
+      expect(mockLastStatusQueryService.execute).toHaveBeenCalledWith('active');
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK 2.2: findReportsByBus — paginated history
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('findReportsByBus', () => {
+    // ── SCN: Returns paginated results with metadata ─────────────────────
+
+    it('should return paginated reports with metadata', async () => {
+      const bus = makeBus({ id: 10, capacity: 40 });
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.findAndCount = jest.fn().mockResolvedValue([[], 0]);
+
+      const result = await service.findReportsByBus(10, 1, 20);
+
+      expect(result).toEqual({
+        data: [],
+        pagination: { page: 1, limit: 20, total: 0, totalPages: 0 },
+      });
+    });
+
+    // ── SCN: Triangulation — page 2 with results ─────────────────────────
+
+    it('should return correct page of results', async () => {
+      const bus = makeBus({ id: 5, capacity: 50 });
+      const reports = [
+        makeReport({ id: 21, bus_id: 5 }),
+        makeReport({ id: 20, bus_id: 5 }),
+      ];
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.findAndCount = jest.fn().mockResolvedValue([reports, 25]);
+
+      const result = await service.findReportsByBus(5, 2, 10);
+
+      expect(result.data).toHaveLength(2);
+      expect(result.pagination.total).toBe(25);
+      expect(result.pagination.totalPages).toBe(3);
+      expect(result.pagination.page).toBe(2);
+    });
+
+    // ── SCN: 404 for non-existent bus ────────────────────────────────────
+
+    it('should throw NotFoundException for non-existent bus', async () => {
+      mockBusReader.findOne.mockRejectedValue(
+        new NotFoundException('Bus con ID 999 no encontrado'),
+      );
+
+      await expect(service.findReportsByBus(999, 1, 20)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+
+    // ── SCN: Date range filtering ────────────────────────────────────────
+
+    it('should pass date range filters to query', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.findAndCount = jest.fn().mockResolvedValue([[], 0]);
+
+      await service.findReportsByBus(1, 1, 20, '2025-01-01', '2025-12-31');
+
+      expect(mockReportRepository.findAndCount).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            bus_id: 1,
+            timestamp: expect.anything(),
+          }),
+        }),
+      );
+    });
+
+    // ── SCN: Only from date ──────────────────────────────────────────────
+
+    it('should filter with only from date', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.findAndCount = jest.fn().mockResolvedValue([[], 0]);
+
+      await service.findReportsByBus(1, 1, 20, '2025-06-01');
+
+      expect(mockReportRepository.findAndCount).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            bus_id: 1,
+          }),
+        }),
+      );
+    });
+
+    // ── SCN: Only to date ────────────────────────────────────────────────
+
+    it('should filter with only to date', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.findAndCount = jest.fn().mockResolvedValue([[], 0]);
+
+      await service.findReportsByBus(1, 1, 20, undefined, '2025-12-31');
+
+      expect(mockReportRepository.findAndCount).toHaveBeenCalledWith(
+        expect.objectContaining({
+          where: expect.objectContaining({
+            bus_id: 1,
+          }),
+        }),
+      );
+    });
+
+    // ── SCN: No date range returns all for bus ───────────────────────────
+
+    it('should return all reports for bus without date filters', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.findAndCount = jest.fn().mockResolvedValue([[], 0]);
+
+      await service.findReportsByBus(1, 1, 20);
+
+      const callArgs = mockReportRepository.findAndCount.mock.calls[0][0];
+      expect(callArgs.where).toEqual({ bus_id: 1 });
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
   // TASK-012: executeBackfill — delegates to BackfillExecuteService
   // ═══════════════════════════════════════════════════════════════════════
 
@@ -650,6 +806,119 @@ describe('ReportsService', () => {
 
       expect(result.updated_count).toBe(5);
       expect(result.remaining_nulls).toBe(3);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK 4.2: createFromTelemetry — creates report from Kafka telemetry
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('createFromTelemetry', () => {
+    // ── SCN: Creates report from telemetry data ──────────────────────────
+
+    it('should create a report from telemetry payload', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      const report = makeReport({
+        bus_id: 1,
+        passenger_count: 25,
+        route_id: 10,
+        stop_id: 100,
+        latitude: -12.04,
+        longitude: -77.03,
+        bus,
+      });
+
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.create.mockReturnValue(report);
+      mockReportRepository.save.mockResolvedValue(report);
+
+      const result = await service.createFromTelemetry(1, {
+        passenger_count: 25,
+        route_id: 10,
+        stop_id: 100,
+        latitude: -12.04,
+        longitude: -77.03,
+      });
+
+      expect(result.bus_id).toBe(1);
+      expect(result.passenger_count).toBe(25);
+      expect(result.route_id).toBe(10);
+      expect(result.stop_id).toBe(100);
+      expect(mockReportRepository.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          bus_id: 1,
+          passenger_count: 25,
+          route_id: 10,
+          stop_id: 100,
+          latitude: -12.04,
+          longitude: -77.03,
+        }),
+      );
+    });
+
+    // ── SCN: Triangulation — different bus and telemetry ──────────────────
+
+    it('should create report with different telemetry values', async () => {
+      const bus = makeBus({ id: 5, capacity: 60 });
+      const report = makeReport({
+        bus_id: 5,
+        passenger_count: 10,
+        route_id: 20,
+        stop_id: 200,
+        latitude: -12.1,
+        longitude: -77.1,
+        bus,
+      });
+
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.create.mockReturnValue(report);
+      mockReportRepository.save.mockResolvedValue(report);
+
+      const result = await service.createFromTelemetry(5, {
+        passenger_count: 10,
+        route_id: 20,
+        stop_id: 200,
+        latitude: -12.1,
+        longitude: -77.1,
+      });
+
+      expect(result.bus_id).toBe(5);
+      expect(result.passenger_count).toBe(10);
+    });
+
+    // ── SCN: Rejects unknown bus (404) ───────────────────────────────────
+
+    it('should throw NotFoundException for unknown bus', async () => {
+      mockBusReader.findOne.mockRejectedValue(
+        new NotFoundException('Bus con ID 999 no encontrado'),
+      );
+
+      await expect(
+        service.createFromTelemetry(999, {
+          passenger_count: 10,
+          route_id: 1,
+          stop_id: 1,
+          latitude: -12.0,
+          longitude: -77.0,
+        }),
+      ).rejects.toThrow(NotFoundException);
+    });
+
+    // ── SCN: Rejects capacity violation (422) ────────────────────────────
+
+    it('should throw UnprocessableEntityException when passenger_count exceeds capacity', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      mockBusReader.findOne.mockResolvedValue(bus);
+
+      await expect(
+        service.createFromTelemetry(1, {
+          passenger_count: 50,
+          route_id: 1,
+          stop_id: 1,
+          latitude: -12.0,
+          longitude: -77.0,
+        }),
+      ).rejects.toThrow(UnprocessableEntityException);
     });
   });
 });

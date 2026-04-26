@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Report } from '../entities/report.entity';
+
+const VALID_FILTERS = ['full', 'active', 'inactive'];
 
 @Injectable()
 export class LastStatusQueryService {
@@ -10,7 +12,13 @@ export class LastStatusQueryService {
     private readonly reportRepository: Repository<Report>,
   ) {}
 
-  async execute(): Promise<any[]> {
+  async execute(filter?: string): Promise<any[]> {
+    if (filter !== undefined && !VALID_FILTERS.includes(filter)) {
+      throw new BadRequestException(
+        `Invalid filter "${filter}". Valid values: full, active, inactive`,
+      );
+    }
+
     const rawResults = await this.reportRepository.query(`
       SELECT
         b.id AS bus_id,
@@ -36,7 +44,7 @@ export class LastStatusQueryService {
       ORDER BY r.timestamp DESC NULLS LAST, b.id ASC
     `);
 
-    return rawResults.map((row: any) => ({
+    const mapped = rawResults.map((row: any) => ({
       bus_id: Number(row.bus_id),
       bus_code: row.bus_code,
       bus_capacity: Number(row.bus_capacity),
@@ -49,6 +57,30 @@ export class LastStatusQueryService {
       stop_id:
         row.stop_id !== null ? Number(row.stop_id) : null,
       stop_name: row.stop_name,
+      occupancy_percentage:
+        row.passenger_count !== null
+          ? Math.round(
+              (Number(row.passenger_count) / Number(row.bus_capacity)) *
+                100 *
+                100,
+            ) / 100
+          : null,
     }));
+
+    if (filter === 'full') {
+      return mapped.filter(
+        (row: any) =>
+          row.passenger_count !== null &&
+          row.passenger_count >= row.bus_capacity,
+      );
+    }
+    if (filter === 'active') {
+      return mapped.filter((row: any) => row.timestamp !== null);
+    }
+    if (filter === 'inactive') {
+      return mapped.filter((row: any) => row.timestamp === null);
+    }
+
+    return mapped;
   }
 }

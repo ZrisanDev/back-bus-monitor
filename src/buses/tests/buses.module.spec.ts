@@ -4,6 +4,7 @@ import { BusesModule } from '../buses.module';
 import { BusesService } from '../buses.service';
 import { BusesController } from '../buses.controller';
 import { Bus } from '../entities/bus.entity';
+import { Report } from '../../reports/entities/report.entity';
 import { MaxPassengersValidator } from '../validators/max-passengers.validator';
 
 describe('BusesModule', () => {
@@ -19,6 +20,14 @@ describe('BusesModule', () => {
         findOneBy: jest.fn(),
         create: jest.fn(),
         save: jest.fn(),
+      })
+      .overrideProvider(getRepositoryToken(Report))
+      .useValue({
+        create: jest.fn(),
+        save: jest.fn(),
+        find: jest.fn(),
+        findAndCount: jest.fn(),
+        query: jest.fn(),
       })
       .compile();
   });

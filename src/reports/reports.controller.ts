@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Param, Inject } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Query, Inject } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
 import { CreateReportDto } from './dto/create-report.dto';
 
 @ApiTags('reports')
@@ -12,9 +12,11 @@ export class ReportsController {
   // ⚠️ MUST be declared before routes with :id to avoid "status" matching as :id
   @Get('buses/status')
   @ApiOperation({ summary: 'Get last status of all buses' })
+  @ApiQuery({ name: 'filter', required: false, enum: ['full', 'active', 'inactive'] })
   @ApiResponse({ status: 200, description: 'Last status of all buses' })
-  getLastStatusAll() {
-    return this.reportsService.getLastStatusAll();
+  @ApiResponse({ status: 400, description: 'Invalid filter value' })
+  getLastStatusAll(@Query('filter') filter?: string) {
+    return this.reportsService.getLastStatusAll(filter);
   }
 
   @Get('backfill-preview')

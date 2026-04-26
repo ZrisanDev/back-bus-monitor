@@ -4,12 +4,30 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+import {
+  resolveKafkaConfig,
+  buildKafkaMicroserviceOptions,
+} from './config/kafka.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Global prefix for all routes
   app.setGlobalPrefix('api');
+
+  // ── Kafka hybrid bootstrap (conditional on KAFKA_ENABLED) ──────────
+  const kafkaConfig = resolveKafkaConfig(process.env);
+  if (kafkaConfig.enabled) {
+    const microserviceOptions =
+      buildKafkaMicroserviceOptions(kafkaConfig);
+    app.connectMicroservice(microserviceOptions);
+    await app.startAllMicroservices();
+    console.log(
+      `📨 Kafka microservice connected to ${kafkaConfig.brokers.join(', ')}`,
+    );
+  } else {
+    console.log('📨 Kafka disabled — running in HTTP-only mode');
+  }
 
   // Enable CORS for frontend
   app.enableCors({

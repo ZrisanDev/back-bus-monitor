@@ -6,6 +6,7 @@ import { Bus } from '../entities/bus.entity';
 describe('BusesController', () => {
   let controller: BusesController;
   let service: any;
+  let reportsService: any;
 
   const makeBus = (overrides: Partial<Bus> = {}): Bus => ({
     id: 1,
@@ -30,11 +31,19 @@ describe('BusesController', () => {
             findByCode: jest.fn(),
           },
         },
+        {
+          provide: 'IReportsService',
+          useValue: {
+            findReportsByBus: jest.fn(),
+            getLastStatusAll: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
     controller = module.get<BusesController>(BusesController);
     service = module.get('IBusesService');
+    reportsService = module.get('IReportsService');
   });
 
   // ═══════════════════════════════════════════════════════════════════════
@@ -100,6 +109,73 @@ describe('BusesController', () => {
 
       expect(result).toEqual([]);
       expect(service.findAll).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK 2.2: GET /buses/:id/reports — historical reports with pagination
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('findReportsByBus', () => {
+    // ── SCN: Returns paginated reports for a bus ──────────────────────────
+
+    it('should delegate to reportsService.findReportsByBus with parsed id and defaults', async () => {
+      const paginatedResult = {
+        data: [],
+        pagination: { page: 1, limit: 20, total: 0, totalPages: 0 },
+      };
+      jest.spyOn(reportsService, 'findReportsByBus').mockResolvedValue(paginatedResult);
+
+      const result = await controller.findReportsByBus('1');
+
+      expect(result).toEqual(paginatedResult);
+      expect(reportsService.findReportsByBus).toHaveBeenCalledWith(1, 1, 20, undefined, undefined);
+    });
+
+    // ── SCN: Passes pagination params ─────────────────────────────────────
+
+    it('should pass page and limit query params to service', async () => {
+      const paginatedResult = {
+        data: [],
+        pagination: { page: 2, limit: 10, total: 15, totalPages: 2 },
+      };
+      jest.spyOn(reportsService, 'findReportsByBus').mockResolvedValue(paginatedResult);
+
+      const result = await controller.findReportsByBus('5', '2', '10');
+
+      expect(result.pagination.page).toBe(2);
+      expect(result.pagination.limit).toBe(10);
+      expect(reportsService.findReportsByBus).toHaveBeenCalledWith(5, 2, 10, undefined, undefined);
+    });
+
+    // ── SCN: Passes date range filters ────────────────────────────────────
+
+    it('should pass from and to date filters to service', async () => {
+      const paginatedResult = {
+        data: [],
+        pagination: { page: 1, limit: 20, total: 0, totalPages: 0 },
+      };
+      jest.spyOn(reportsService, 'findReportsByBus').mockResolvedValue(paginatedResult);
+
+      await controller.findReportsByBus('1', '1', '20', '2025-01-01', '2025-12-31');
+
+      expect(reportsService.findReportsByBus).toHaveBeenCalledWith(
+        1, 1, 20, '2025-01-01', '2025-12-31',
+      );
+    });
+
+    // ── SCN: Triangulation — different bus id ─────────────────────────────
+
+    it('should parse different bus id correctly', async () => {
+      const paginatedResult = {
+        data: [],
+        pagination: { page: 1, limit: 20, total: 0, totalPages: 0 },
+      };
+      jest.spyOn(reportsService, 'findReportsByBus').mockResolvedValue(paginatedResult);
+
+      await controller.findReportsByBus('42');
+
+      expect(reportsService.findReportsByBus).toHaveBeenCalledWith(42, 1, 20, undefined, undefined);
     });
   });
 });

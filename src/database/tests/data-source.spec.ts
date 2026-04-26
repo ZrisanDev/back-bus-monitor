@@ -35,17 +35,17 @@ describe('Migration DataSource — data-source.ts', () => {
     expect(entityNames).toContain('BusAssignment');
   });
 
-  // ── SCN: All 12 migration files are registered ───────────────────────
+  // ── SCN: All 14 migration files are registered ───────────────────────
 
-  it('should register exactly 12 migration files', () => {
+  it('should register exactly 14 migration files', () => {
     const migrations = AppDataSource.options.migrations as string[];
 
-    expect(migrations).toHaveLength(12);
+    expect(migrations).toHaveLength(14);
   });
 
   // ── SCN: Migrations are in correct order ─────────────────────────────
 
-  it('should have migrations ordered from 001 to 012', () => {
+  it('should have migrations ordered from 001 to 014', () => {
     const migrations = AppDataSource.options.migrations as string[];
 
     expect(migrations[0]).toContain('001_create_buses');
@@ -60,6 +60,8 @@ describe('Migration DataSource — data-source.ts', () => {
     expect(migrations[9]).toContain('010_create_bus_assignments');
     expect(migrations[10]).toContain('011_add_route_stop_to_reports');
     expect(migrations[11]).toContain('012_enforce_report_route_stop_not_null');
+    expect(migrations[12]).toContain('013_add_lat_lng_to_reports');
+    expect(migrations[13]).toContain('014_reconcile_reports_geo_constraints');
   });
 
   // ── SCN: DataSource is configured for PostgreSQL ──────────────────────

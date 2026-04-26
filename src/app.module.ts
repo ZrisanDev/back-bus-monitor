@@ -12,6 +12,7 @@ import { RouteStopsModule } from './route-stops/route-stops.module';
 import { HolidaysModule } from './holidays/holidays.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { BusAssignmentsModule } from './bus-assignments/bus-assignments.module';
+import { SimulatorModule } from './simulator/simulator.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { BusAssignmentsModule } from './bus-assignments/bus-assignments.module';
     HolidaysModule,
     SchedulesModule,
     BusAssignmentsModule,
+    SimulatorModule,
   ],
 })
 export class AppModule {}

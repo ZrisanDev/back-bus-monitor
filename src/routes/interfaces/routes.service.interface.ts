@@ -8,4 +8,6 @@ export interface IRoutesService {
   findOne(id: number): Promise<Route>;
   update(id: number, dto: UpdateRouteDto): Promise<Route>;
   remove(id: number): Promise<Route>;
+  findStopsByRoute(routeId: number): Promise<any[]>;
+  findGeoJsonByRoute(routeId: number): Promise<any>;
 }

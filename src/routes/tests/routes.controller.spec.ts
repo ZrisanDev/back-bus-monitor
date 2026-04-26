@@ -29,6 +29,8 @@ describe('RoutesController', () => {
             findOne: jest.fn(),
             update: jest.fn(),
             remove: jest.fn(),
+            findStopsByRoute: jest.fn(),
+            findGeoJsonByRoute: jest.fn(),
           },
         },
       ],
@@ -129,6 +131,66 @@ describe('RoutesController', () => {
 
       expect(result).toEqual(route);
       expect(service.remove).toHaveBeenCalledWith(1);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK 2.3: GET /routes/:id/stops
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('findStopsByRoute', () => {
+    // ── SCN: Delegates to service with parsed id ──────────────────────────
+
+    it('should call service.findStopsByRoute with parsed id', async () => {
+      const stops = [
+        { id: 1, name: 'Stop A', latitude: -12.0, longitude: -77.0 },
+        { id: 2, name: 'Stop B', latitude: -12.1, longitude: -77.1 },
+      ];
+      jest.spyOn(service, 'findStopsByRoute').mockResolvedValue(stops);
+
+      const result = await controller.findStopsByRoute('1');
+
+      expect(result).toEqual(stops);
+      expect(service.findStopsByRoute).toHaveBeenCalledWith(1);
+    });
+
+    // ── SCN: Triangulation — different route id ───────────────────────────
+
+    it('should parse different route id correctly', async () => {
+      jest.spyOn(service, 'findStopsByRoute').mockResolvedValue([]);
+
+      await controller.findStopsByRoute('42');
+
+      expect(service.findStopsByRoute).toHaveBeenCalledWith(42);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK 2.3: GET /routes/:id/geojson
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('findGeoJsonByRoute', () => {
+    // ── SCN: Delegates to service with parsed id ──────────────────────────
+
+    it('should call service.findGeoJsonByRoute with parsed id', async () => {
+      const geojson = { type: 'FeatureCollection', features: [] };
+      jest.spyOn(service, 'findGeoJsonByRoute').mockResolvedValue(geojson);
+
+      const result = await controller.findGeoJsonByRoute('1');
+
+      expect(result).toEqual(geojson);
+      expect(service.findGeoJsonByRoute).toHaveBeenCalledWith(1);
+    });
+
+    // ── SCN: Triangulation — different route id ───────────────────────────
+
+    it('should parse different route id correctly', async () => {
+      const geojson = { type: 'FeatureCollection', features: [] };
+      jest.spyOn(service, 'findGeoJsonByRoute').mockResolvedValue(geojson);
+
+      await controller.findGeoJsonByRoute('5');
+
+      expect(service.findGeoJsonByRoute).toHaveBeenCalledWith(5);
     });
   });
 });

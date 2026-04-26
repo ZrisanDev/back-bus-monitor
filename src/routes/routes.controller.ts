@@ -8,7 +8,7 @@ import {
   Delete,
   Inject,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CreateRouteDto } from './dto/create-route.dto';
 import { UpdateRouteDto } from './dto/update-route.dto';
 
@@ -33,6 +33,24 @@ export class RoutesController {
   @ApiResponse({ status: 200, description: 'List of routes' })
   findAll() {
     return this.routesService.findAll();
+  }
+
+  @Get(':id/stops')
+  @ApiOperation({ summary: 'Get ordered stops for a route' })
+  @ApiParam({ name: 'id', description: 'Route ID', type: Number })
+  @ApiResponse({ status: 200, description: 'Ordered stops' })
+  @ApiResponse({ status: 404, description: 'Route not found' })
+  findStopsByRoute(@Param('id') id: string) {
+    return this.routesService.findStopsByRoute(Number(id));
+  }
+
+  @Get(':id/geojson')
+  @ApiOperation({ summary: 'Get GeoJSON for a route' })
+  @ApiParam({ name: 'id', description: 'Route ID', type: Number })
+  @ApiResponse({ status: 200, description: 'GeoJSON FeatureCollection' })
+  @ApiResponse({ status: 404, description: 'Route not found' })
+  findGeoJsonByRoute(@Param('id') id: string) {
+    return this.routesService.findGeoJsonByRoute(Number(id));
   }
 
   @Get(':id')
