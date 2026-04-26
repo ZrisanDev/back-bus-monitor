@@ -7,8 +7,10 @@ import {
 import { ReportsService } from '../reports.service';
 import { Report } from '../entities/report.entity';
 import { Bus } from '../../buses/entities/bus.entity';
-import { BusesService } from '../../buses/buses.service';
 import { CreateReportDto } from '../dto/create-report.dto';
+import { LastStatusQueryService } from '../services/last-status-query.service';
+import { BackfillPreviewService } from '../services/backfill-preview.service';
+import { BackfillExecuteService } from '../services/backfill-execute.service';
 
 describe('ReportsService', () => {
   let service: ReportsService;
@@ -18,8 +20,20 @@ describe('ReportsService', () => {
     find: jest.Mock;
     query: jest.Mock;
   };
-  let mockBusesService: {
+  let mockBusReader: {
     findOne: jest.Mock;
+  };
+  let mockLastStatusQueryService: {
+    execute: jest.Mock;
+  };
+  let mockCapacityValidator: {
+    validate: jest.Mock;
+  };
+  let mockBackfillPreviewService: {
+    execute: jest.Mock;
+  };
+  let mockBackfillExecuteService: {
+    execute: jest.Mock;
   };
 
   // ── Helpers ────────────────────────────────────────────────────────────
@@ -37,11 +51,13 @@ describe('ReportsService', () => {
   const makeReport = (overrides: Partial<Report> = {}): Report => ({
     id: 1,
     bus_id: 1,
-    latitude: -34.6,
-    longitude: -58.38,
     passenger_count: 22,
     timestamp: new Date('2025-06-15T12:00:00.000Z'),
     created_at: new Date('2025-06-15T12:00:00.000Z'),
+    route_id: null,
+    stop_id: null,
+    route: null,
+    stop: null,
     bus: makeBus(),
     ...overrides,
   });
@@ -54,8 +70,31 @@ describe('ReportsService', () => {
       query: jest.fn(),
     };
 
-    mockBusesService = {
+    mockBusReader = {
       findOne: jest.fn(),
+    };
+
+    mockLastStatusQueryService = {
+      execute: jest.fn(),
+    };
+
+    mockBackfillPreviewService = {
+      execute: jest.fn(),
+    };
+
+    mockBackfillExecuteService = {
+      execute: jest.fn(),
+    };
+
+    // Mock validator that replicates MaxPassengersValidator behavior
+    mockCapacityValidator = {
+      validate: jest.fn((dto: CreateReportDto, bus: Bus) => {
+        if (dto.passenger_count > bus.capacity) {
+          throw new UnprocessableEntityException(
+            `La cantidad de pasajeros (${dto.passenger_count}) excede la capacidad del bus (${bus.capacity})`,
+          );
+        }
+      }),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -66,8 +105,24 @@ describe('ReportsService', () => {
           useValue: mockReportRepository,
         },
         {
-          provide: BusesService,
-          useValue: mockBusesService,
+          provide: 'IBusReader',
+          useValue: mockBusReader,
+        },
+        {
+          provide: LastStatusQueryService,
+          useValue: mockLastStatusQueryService,
+        },
+        {
+          provide: BackfillPreviewService,
+          useValue: mockBackfillPreviewService,
+        },
+        {
+          provide: BackfillExecuteService,
+          useValue: mockBackfillExecuteService,
+        },
+        {
+          provide: 'ICapacityValidator',
+          useValue: mockCapacityValidator,
         },
       ],
     }).compile();
@@ -81,8 +136,6 @@ describe('ReportsService', () => {
 
   describe('create', () => {
     const dto: CreateReportDto = {
-      latitude: -34.6,
-      longitude: -58.38,
       passenger_count: 22,
     };
 
@@ -92,7 +145,7 @@ describe('ReportsService', () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const report = makeReport({ bus_id: 10, passenger_count: 22, bus });
 
-      mockBusesService.findOne.mockResolvedValue(bus);
+      mockBusReader.findOne.mockResolvedValue(bus);
       mockReportRepository.create.mockReturnValue(report);
       mockReportRepository.save.mockResolvedValue(report);
 
@@ -100,7 +153,7 @@ describe('ReportsService', () => {
 
       expect(result).toEqual(report);
       expect(result.passenger_count).toBe(22);
-      expect(mockBusesService.findOne).toHaveBeenCalledWith(10);
+      expect(mockBusReader.findOne).toHaveBeenCalledWith(10);
       expect(mockReportRepository.create).toHaveBeenCalled();
       expect(mockReportRepository.save).toHaveBeenCalled();
     });
@@ -110,19 +163,15 @@ describe('ReportsService', () => {
     it('should create report with different bus and passenger count', async () => {
       const bus = makeBus({ id: 5, capacity: 60 });
       const differentDto: CreateReportDto = {
-        latitude: 40.7128,
-        longitude: -74.006,
         passenger_count: 0,
       };
       const report = makeReport({
         bus_id: 5,
         passenger_count: 0,
-        latitude: 40.7128,
-        longitude: -74.006,
         bus,
       });
 
-      mockBusesService.findOne.mockResolvedValue(bus);
+      mockBusReader.findOne.mockResolvedValue(bus);
       mockReportRepository.create.mockReturnValue(report);
       mockReportRepository.save.mockResolvedValue(report);
 
@@ -130,19 +179,16 @@ describe('ReportsService', () => {
 
       expect(result.bus_id).toBe(5);
       expect(result.passenger_count).toBe(0);
-      expect(result.latitude).toBe(40.7128);
     });
 
     // ── SCN: Bus not found (404) ─────────────────────────────────────────
 
     it('should throw NotFoundException when bus does not exist', async () => {
-      mockBusesService.findOne.mockRejectedValue(
+      mockBusReader.findOne.mockRejectedValue(
         new NotFoundException('Bus con ID 999 no encontrado'),
       );
 
-      await expect(service.create(999, dto)).rejects.toThrow(
-        NotFoundException,
-      );
+      await expect(service.create(999, dto)).rejects.toThrow(NotFoundException);
       expect(mockReportRepository.create).not.toHaveBeenCalled();
       expect(mockReportRepository.save).not.toHaveBeenCalled();
     });
@@ -150,7 +196,7 @@ describe('ReportsService', () => {
     // ── SCN: NotFoundException has 404 status ────────────────────────────
 
     it('should throw NotFoundException with 404 status', async () => {
-      mockBusesService.findOne.mockRejectedValue(
+      mockBusReader.findOne.mockRejectedValue(
         new NotFoundException('Bus con ID 999 no encontrado'),
       );
 
@@ -168,12 +214,10 @@ describe('ReportsService', () => {
     it('should throw UnprocessableEntityException when passenger_count exceeds capacity', async () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const exceedDto: CreateReportDto = {
-        latitude: -34.6,
-        longitude: -58.38,
         passenger_count: 41,
       };
 
-      mockBusesService.findOne.mockResolvedValue(bus);
+      mockBusReader.findOne.mockResolvedValue(bus);
 
       await expect(service.create(10, exceedDto)).rejects.toThrow(
         UnprocessableEntityException,
@@ -185,12 +229,10 @@ describe('ReportsService', () => {
     it('should include required message in 422 error', async () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const exceedDto: CreateReportDto = {
-        latitude: -34.6,
-        longitude: -58.38,
         passenger_count: 50,
       };
 
-      mockBusesService.findOne.mockResolvedValue(bus);
+      mockBusReader.findOne.mockResolvedValue(bus);
 
       try {
         await service.create(10, exceedDto);
@@ -209,12 +251,10 @@ describe('ReportsService', () => {
     it('should not save report when capacity is exceeded', async () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const exceedDto: CreateReportDto = {
-        latitude: -34.6,
-        longitude: -58.38,
         passenger_count: 41,
       };
 
-      mockBusesService.findOne.mockResolvedValue(bus);
+      mockBusReader.findOne.mockResolvedValue(bus);
 
       await expect(service.create(10, exceedDto)).rejects.toThrow();
       expect(mockReportRepository.create).not.toHaveBeenCalled();
@@ -284,66 +324,23 @@ describe('ReportsService', () => {
   });
 
   // ═══════════════════════════════════════════════════════════════════════
-  // findBusCapacity — Task 2.4
-  // ═══════════════════════════════════════════════════════════════════════
-
-  describe('findBusCapacity', () => {
-    // ── SCN: Returns bus capacity ─────────────────────────────────────────
-
-    it('should return capacity for existing bus', async () => {
-      const bus = makeBus({ id: 1, capacity: 40 });
-      mockBusesService.findOne.mockResolvedValue(bus);
-
-      const result = await service.findBusCapacity(1);
-
-      expect(result).toBe(40);
-      expect(mockBusesService.findOne).toHaveBeenCalledWith(1);
-    });
-
-    // ── SCN: Triangulation — different capacity ───────────────────────────
-
-    it('should return different capacity for another bus', async () => {
-      const bus = makeBus({ id: 5, capacity: 80 });
-      mockBusesService.findOne.mockResolvedValue(bus);
-
-      const result = await service.findBusCapacity(5);
-
-      expect(result).toBe(80);
-    });
-
-    // ── SCN: Throws NotFoundException for non-existent bus ────────────────
-
-    it('should throw NotFoundException for non-existent bus', async () => {
-      mockBusesService.findOne.mockRejectedValue(
-        new NotFoundException('Bus con ID 999 no encontrado'),
-      );
-
-      await expect(service.findBusCapacity(999)).rejects.toThrow(
-        NotFoundException,
-      );
-    });
-  });
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // getLastStatusAll — Task 2.5
+  // getLastStatusAll — delegates to LastStatusQueryService
   // ═══════════════════════════════════════════════════════════════════════
 
   describe('getLastStatusAll', () => {
     // ── SCN: Returns status for buses with reports ────────────────────────
 
     it('should return latest status for all buses with reports', async () => {
-      const rawResults = [
+      const mappedResults = [
         {
-          bus_id: '1',
+          bus_id: 1,
           bus_code: 'BUS-001',
           bus_capacity: 40,
-          latitude: '-34.60',
-          longitude: '-58.38',
           passenger_count: 22,
           timestamp: new Date('2025-06-15T12:00:00.000Z'),
         },
       ];
-      mockReportRepository.query.mockResolvedValue(rawResults);
+      mockLastStatusQueryService.execute.mockResolvedValue(mappedResults);
 
       const result = await service.getLastStatusAll();
 
@@ -351,34 +348,30 @@ describe('ReportsService', () => {
       expect(result[0].bus_id).toBe(1);
       expect(result[0].bus_code).toBe('BUS-001');
       expect(result[0].bus_capacity).toBe(40);
-      expect(result[0].latitude).toBe(-34.6);
       expect(result[0].passenger_count).toBe(22);
+      expect(mockLastStatusQueryService.execute).toHaveBeenCalledTimes(1);
     });
 
     // ── SCN: Buses without reports have null values ───────────────────────
 
     it('should include buses without reports with null fields', async () => {
-      const rawResults = [
+      const mappedResults = [
         {
-          bus_id: '1',
+          bus_id: 1,
           bus_code: 'BUS-001',
           bus_capacity: 40,
-          latitude: '-34.60',
-          longitude: '-58.38',
           passenger_count: 22,
           timestamp: new Date('2025-06-15T12:00:00.000Z'),
         },
         {
-          bus_id: '2',
+          bus_id: 2,
           bus_code: 'BUS-002',
           bus_capacity: 60,
-          latitude: null,
-          longitude: null,
           passenger_count: null,
           timestamp: null,
         },
       ];
-      mockReportRepository.query.mockResolvedValue(rawResults);
+      mockLastStatusQueryService.execute.mockResolvedValue(mappedResults);
 
       const result = await service.getLastStatusAll();
 
@@ -386,8 +379,6 @@ describe('ReportsService', () => {
       expect(result[1].bus_id).toBe(2);
       expect(result[1].bus_code).toBe('BUS-002');
       expect(result[1].bus_capacity).toBe(60);
-      expect(result[1].latitude).toBeNull();
-      expect(result[1].longitude).toBeNull();
       expect(result[1].passenger_count).toBeNull();
       expect(result[1].timestamp).toBeNull();
     });
@@ -395,18 +386,16 @@ describe('ReportsService', () => {
     // ── SCN: Triangulation — numeric IDs are normalized ───────────────────
 
     it('should normalize BIGINT string IDs to numbers', async () => {
-      const rawResults = [
+      const mappedResults = [
         {
-          bus_id: '42',
+          bus_id: 42,
           bus_code: 'BUS-042',
           bus_capacity: 50,
-          latitude: '10.5',
-          longitude: '-20.3',
           passenger_count: 10,
           timestamp: new Date('2025-06-15T14:00:00.000Z'),
         },
       ];
-      mockReportRepository.query.mockResolvedValue(rawResults);
+      mockLastStatusQueryService.execute.mockResolvedValue(mappedResults);
 
       const result = await service.getLastStatusAll();
 
@@ -417,12 +406,250 @@ describe('ReportsService', () => {
     // ── SCN: Empty result when no buses exist ─────────────────────────────
 
     it('should return empty array when no buses exist', async () => {
-      mockReportRepository.query.mockResolvedValue([]);
+      mockLastStatusQueryService.execute.mockResolvedValue([]);
 
       const result = await service.getLastStatusAll();
 
       expect(result).toEqual([]);
       expect(result).toHaveLength(0);
+    });
+
+    // ── SCN: Delegates to LastStatusQueryService ──────────────────────────
+
+    it('should delegate to lastStatusQueryService.execute()', async () => {
+      const mappedResults = [{ bus_id: 1, bus_code: 'BUS-001' }];
+      mockLastStatusQueryService.execute.mockResolvedValue(mappedResults);
+
+      await service.getLastStatusAll();
+
+      expect(mockLastStatusQueryService.execute).toHaveBeenCalledTimes(1);
+      expect(mockReportRepository.query).not.toHaveBeenCalled();
+    });
+
+    // ── SCN: TASK-013 — enriched response includes route/stop context ─────
+
+    it('should return enriched status with route and stop context', async () => {
+      const mappedResults = [
+        {
+          bus_id: 1,
+          bus_code: 'BUS-001',
+          bus_capacity: 40,
+          passenger_count: 22,
+          timestamp: new Date('2025-06-15T12:00:00.000Z'),
+          route_id: 5,
+          route_name: 'Expreso 5',
+          stop_id: 3,
+          stop_name: 'UNI',
+        },
+      ];
+      mockLastStatusQueryService.execute.mockResolvedValue(mappedResults);
+
+      const result = await service.getLastStatusAll();
+
+      expect(result[0].route_id).toBe(5);
+      expect(result[0].route_name).toBe('Expreso 5');
+      expect(result[0].stop_id).toBe(3);
+      expect(result[0].stop_name).toBe('UNI');
+    });
+
+    // ── SCN: TASK-013 — null route/stop when no assignment ────────────────
+
+    it('should return null route/stop fields for unassigned buses', async () => {
+      const mappedResults = [
+        {
+          bus_id: 2,
+          bus_code: 'BUS-002',
+          bus_capacity: 60,
+          passenger_count: null,
+          timestamp: null,
+          route_id: null,
+          route_name: null,
+          stop_id: null,
+          stop_name: null,
+        },
+      ];
+      mockLastStatusQueryService.execute.mockResolvedValue(mappedResults);
+
+      const result = await service.getLastStatusAll();
+
+      expect(result[0].route_id).toBeNull();
+      expect(result[0].route_name).toBeNull();
+      expect(result[0].stop_id).toBeNull();
+      expect(result[0].stop_name).toBeNull();
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK-010: route_id/stop_id pass-through in create
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('create with route_id/stop_id (TASK-010)', () => {
+    // ── SCN: create passes route_id and stop_id to repository ────────────
+
+    it('should create a report with route_id and stop_id', async () => {
+      const bus = makeBus({ id: 10, capacity: 40 });
+      const dtoWithRoute: CreateReportDto = {
+        passenger_count: 22,
+        route_id: 5,
+        stop_id: 15,
+      };
+      const report = makeReport({
+        bus_id: 10,
+        passenger_count: 22,
+        route_id: 5,
+        stop_id: 15,
+        bus,
+      });
+
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.create.mockReturnValue(report);
+      mockReportRepository.save.mockResolvedValue(report);
+
+      const result = await service.create(10, dtoWithRoute);
+
+      expect(result.route_id).toBe(5);
+      expect(result.stop_id).toBe(15);
+      expect(mockReportRepository.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          bus_id: 10,
+          passenger_count: 22,
+          route_id: 5,
+          stop_id: 15,
+        }),
+      );
+    });
+
+    // ── SCN: create works without route_id/stop_id (legacy) ──────────────
+
+    it('should create a report without route_id and stop_id (nullable)', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      const dtoLegacy: CreateReportDto = {
+        passenger_count: 15,
+      };
+      const report = makeReport({
+        bus_id: 1,
+        passenger_count: 15,
+        route_id: null,
+        stop_id: null,
+        bus,
+      });
+
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.create.mockReturnValue(report);
+      mockReportRepository.save.mockResolvedValue(report);
+
+      const result = await service.create(1, dtoLegacy);
+
+      expect(result.route_id).toBeNull();
+      expect(result.stop_id).toBeNull();
+    });
+
+    // ── SCN: Triangulation — different route/stop IDs ─────────────────────
+
+    it('should create a report with different route_id and stop_id', async () => {
+      const bus = makeBus({ id: 3, capacity: 50 });
+      const dtoWithRoute: CreateReportDto = {
+        passenger_count: 10,
+        route_id: 99,
+        stop_id: 200,
+      };
+      const report = makeReport({
+        bus_id: 3,
+        passenger_count: 10,
+        route_id: 99,
+        stop_id: 200,
+        bus,
+      });
+
+      mockBusReader.findOne.mockResolvedValue(bus);
+      mockReportRepository.create.mockReturnValue(report);
+      mockReportRepository.save.mockResolvedValue(report);
+
+      const result = await service.create(3, dtoWithRoute);
+
+      expect(result.route_id).toBe(99);
+      expect(result.stop_id).toBe(200);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK-011: getBackfillPreview — delegates to BackfillPreviewService
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('getBackfillPreview', () => {
+    // ── SCN: Delegates to BackfillPreviewService ─────────────────────────
+
+    it('should delegate to backfillPreviewService.execute()', async () => {
+      const previewResult = {
+        total_reports: 150,
+        with_route_and_stop: 0,
+        missing_route_id: 150,
+        missing_stop_id: 150,
+        sample_affected: [],
+      };
+      mockBackfillPreviewService.execute.mockResolvedValue(previewResult);
+
+      const result = await service.getBackfillPreview();
+
+      expect(result).toEqual(previewResult);
+      expect(mockBackfillPreviewService.execute).toHaveBeenCalledTimes(1);
+    });
+
+    // ── SCN: Triangulation — all backfilled ─────────────────────────────
+
+    it('should return zero missing when fully backfilled', async () => {
+      const previewResult = {
+        total_reports: 50,
+        with_route_and_stop: 50,
+        missing_route_id: 0,
+        missing_stop_id: 0,
+        sample_affected: [],
+      };
+      mockBackfillPreviewService.execute.mockResolvedValue(previewResult);
+
+      const result = await service.getBackfillPreview();
+
+      expect(result.missing_route_id).toBe(0);
+      expect(result.missing_stop_id).toBe(0);
+      expect(result.with_route_and_stop).toBe(50);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // TASK-012: executeBackfill — delegates to BackfillExecuteService
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('executeBackfill', () => {
+    // ── SCN: Delegates to BackfillExecuteService ─────────────────────────
+
+    it('should delegate to backfillExecuteService.execute()', async () => {
+      const backfillResult = {
+        updated_count: 50,
+        remaining_nulls: 0,
+        message: 'Backfill complete: 50 reports updated, 0 remaining nulls',
+      };
+      mockBackfillExecuteService.execute.mockResolvedValue(backfillResult);
+
+      const result = await service.executeBackfill();
+
+      expect(result).toEqual(backfillResult);
+      expect(mockBackfillExecuteService.execute).toHaveBeenCalledTimes(1);
+    });
+
+    // ── SCN: Triangulation — partial backfill ───────────────────────────
+
+    it('should return partial backfill results', async () => {
+      const backfillResult = {
+        updated_count: 5,
+        remaining_nulls: 3,
+        message: 'Backfill complete: 5 reports updated, 3 remaining nulls',
+      };
+      mockBackfillExecuteService.execute.mockResolvedValue(backfillResult);
+
+      const result = await service.executeBackfill();
+
+      expect(result.updated_count).toBe(5);
+      expect(result.remaining_nulls).toBe(3);
     });
   });
 });

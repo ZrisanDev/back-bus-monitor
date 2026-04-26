@@ -1,17 +1,21 @@
-import { IsNumber, Min, Max } from 'class-validator';
+import { IsNumber, Min, IsInt, IsOptional } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateReportDto {
-  @IsNumber()
-  @Min(-90)
-  @Max(90)
-  latitude: number;
-
-  @IsNumber()
-  @Min(-180)
-  @Max(180)
-  longitude: number;
-
+  @ApiProperty({ example: 25, description: 'Current passenger count', minimum: 0 })
   @IsNumber()
   @Min(0)
   passenger_count: number;
+
+  @ApiProperty({ example: 1, description: 'Route ID', required: false })
+  @IsInt()
+  @Min(1)
+  @IsOptional()
+  route_id?: number;
+
+  @ApiProperty({ example: 1, description: 'Stop ID', required: false })
+  @IsInt()
+  @Min(1)
+  @IsOptional()
+  stop_id?: number;
 }

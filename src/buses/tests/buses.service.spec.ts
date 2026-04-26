@@ -245,4 +245,43 @@ describe('BusesService', () => {
       }
     });
   });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // findBusCapacity
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('findBusCapacity', () => {
+    // ── SCN: Returns bus capacity ─────────────────────────────────────────
+
+    it('should return capacity for existing bus', async () => {
+      const bus = makeBus({ id: 1, capacity: 40 });
+      mockRepository.findOneBy.mockResolvedValue(bus);
+
+      const result = await service.findBusCapacity(1);
+
+      expect(result).toBe(40);
+      expect(mockRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
+    });
+
+    // ── SCN: Triangulation — different capacity ───────────────────────────
+
+    it('should return different capacity for another bus', async () => {
+      const bus = makeBus({ id: 5, capacity: 80 });
+      mockRepository.findOneBy.mockResolvedValue(bus);
+
+      const result = await service.findBusCapacity(5);
+
+      expect(result).toBe(80);
+    });
+
+    // ── SCN: Throws NotFoundException for non-existent bus ────────────────
+
+    it('should throw NotFoundException for non-existent bus', async () => {
+      mockRepository.findOneBy.mockResolvedValue(null);
+
+      await expect(service.findBusCapacity(999)).rejects.toThrow(
+        NotFoundException,
+      );
+    });
+  });
 });

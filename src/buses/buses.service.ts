@@ -3,9 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Bus } from './entities/bus.entity';
 import { CreateBusDto } from './dto/create-bus.dto';
+import { IBusesService } from './interfaces/buses.service.interface';
 
 @Injectable()
-export class BusesService {
+export class BusesService implements IBusesService {
   constructor(
     @InjectRepository(Bus)
     private readonly busRepository: Repository<Bus>,
@@ -37,5 +38,10 @@ export class BusesService {
       throw new NotFoundException(`Bus con ID ${id} no encontrado`);
     }
     return bus;
+  }
+
+  async findBusCapacity(busId: number): Promise<number> {
+    const bus = await this.findOne(busId);
+    return bus.capacity;
   }
 }

@@ -1,34 +1,40 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Report } from './entities/report.entity';
-import { BusesService } from '../buses/buses.service';
 import { CreateReportDto } from './dto/create-report.dto';
+import { LastStatusQueryService } from './services/last-status-query.service';
+import { BackfillPreviewService } from './services/backfill-preview.service';
+import { BackfillExecuteService } from './services/backfill-execute.service';
+import type { ICapacityValidator } from '../buses/validators/capacity.validator.interface';
+import type { IBusReader } from '../buses/interfaces/bus-reader.interface';
 
 @Injectable()
 export class ReportsService {
   constructor(
     @InjectRepository(Report)
     private readonly reportRepository: Repository<Report>,
-    private readonly busesService: BusesService,
+    @Inject('IBusReader')
+    private readonly busReader: IBusReader,
+    private readonly lastStatusQueryService: LastStatusQueryService,
+    private readonly backfillPreviewService: BackfillPreviewService,
+    private readonly backfillExecuteService: BackfillExecuteService,
+    @Inject('ICapacityValidator')
+    private readonly capacityValidator: ICapacityValidator,
   ) {}
 
   async create(busId: number, dto: CreateReportDto): Promise<Report> {
     // Validate bus exists (throws NotFoundException if not found)
-    const bus = await this.busesService.findOne(busId);
+    const bus = await this.busReader.findOne(busId);
 
-    // Validate capacity (bus already loaded, use it directly)
-    if (dto.passenger_count > bus.capacity) {
-      throw new UnprocessableEntityException(
-        `La cantidad de pasajeros (${dto.passenger_count}) excede la capacidad del bus (${bus.capacity})`,
-      );
-    }
+    // Validate using extensible strategy chain (OCP)
+    this.capacityValidator.validate(dto, bus);
 
     const report = this.reportRepository.create({
       bus_id: busId,
-      latitude: dto.latitude,
-      longitude: dto.longitude,
       passenger_count: dto.passenger_count,
+      route_id: dto.route_id ?? null,
+      stop_id: dto.stop_id ?? null,
       bus,
     });
 
@@ -42,41 +48,15 @@ export class ReportsService {
     });
   }
 
-  async findBusCapacity(busId: number): Promise<number> {
-    const bus = await this.busesService.findOne(busId);
-    return bus.capacity;
+  async getLastStatusAll(): Promise<any[]> {
+    return this.lastStatusQueryService.execute();
   }
 
-  async getLastStatusAll(): Promise<any[]> {
-    const rawResults = await this.reportRepository.query(`
-      SELECT
-        b.id AS bus_id,
-        b.code AS bus_code,
-        b.capacity AS bus_capacity,
-        r.latitude,
-        r.longitude,
-        r.passenger_count,
-        r.timestamp
-      FROM buses b
-      LEFT JOIN LATERAL (
-        SELECT latitude, longitude, passenger_count, timestamp
-        FROM reports
-        WHERE bus_id = b.id
-        ORDER BY timestamp DESC
-        LIMIT 1
-      ) r ON true
-      ORDER BY r.timestamp DESC NULLS LAST, b.id ASC
-    `);
+  async getBackfillPreview(): Promise<any> {
+    return this.backfillPreviewService.execute();
+  }
 
-    return rawResults.map((row: any) => ({
-      bus_id: Number(row.bus_id),
-      bus_code: row.bus_code,
-      bus_capacity: Number(row.bus_capacity),
-      latitude: row.latitude !== null ? Number(row.latitude) : null,
-      longitude: row.longitude !== null ? Number(row.longitude) : null,
-      passenger_count:
-        row.passenger_count !== null ? Number(row.passenger_count) : null,
-      timestamp: row.timestamp,
-    }));
+  async executeBackfill(): Promise<any> {
+    return this.backfillExecuteService.execute();
   }
 }

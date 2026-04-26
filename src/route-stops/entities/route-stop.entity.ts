@@ -1,0 +1,31 @@
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+
+@Entity('route_stops')
+export class RouteStop {
+  @PrimaryGeneratedColumn({ type: 'bigint' })
+  id: number;
+
+  @Column({ type: 'bigint', name: 'route_id' })
+  route_id: number;
+
+  @Column({ type: 'bigint', name: 'stop_id' })
+  stop_id: number;
+
+  @Column({ type: 'bigint', name: 'direction_id' })
+  direction_id: number;
+
+  @Column({ type: 'integer', name: 'stop_order' })
+  stop_order: number;
+
+  @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamptz', name: 'updated_at' })
+  updated_at: Date;
+}

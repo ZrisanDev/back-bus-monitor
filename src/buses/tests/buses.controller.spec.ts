@@ -1,12 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { BusesController } from '../buses.controller';
-import { BusesService } from '../buses.service';
 import { CreateBusDto } from '../dto/create-bus.dto';
 import { Bus } from '../entities/bus.entity';
 
 describe('BusesController', () => {
   let controller: BusesController;
-  let service: BusesService;
+  let service: any;
 
   const makeBus = (overrides: Partial<Bus> = {}): Bus => ({
     id: 1,
@@ -23,7 +22,7 @@ describe('BusesController', () => {
       controllers: [BusesController],
       providers: [
         {
-          provide: BusesService,
+          provide: 'IBusesService',
           useValue: {
             create: jest.fn(),
             findAll: jest.fn(),
@@ -35,7 +34,7 @@ describe('BusesController', () => {
     }).compile();
 
     controller = module.get<BusesController>(BusesController);
-    service = module.get<BusesService>(BusesService);
+    service = module.get('IBusesService');
   });
 
   // ═══════════════════════════════════════════════════════════════════════

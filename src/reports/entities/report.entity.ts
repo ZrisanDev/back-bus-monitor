@@ -7,6 +7,8 @@ import {
   CreateDateColumn,
 } from 'typeorm';
 import { Bus } from '../../buses/entities/bus.entity';
+import { Route } from '../../routes/entities/route.entity';
+import { Stop } from '../../stops/entities/stop.entity';
 
 @Entity('reports')
 export class Report {
@@ -16,14 +18,14 @@ export class Report {
   @Column({ type: 'bigint', name: 'bus_id' })
   bus_id: number;
 
-  @Column({ type: 'numeric', precision: 10, scale: 8 })
-  latitude: number;
-
-  @Column({ type: 'numeric', precision: 11, scale: 8 })
-  longitude: number;
-
   @Column({ type: 'int', name: 'passenger_count', default: 0 })
   passenger_count: number;
+
+  @Column({ type: 'bigint', name: 'route_id', nullable: true })
+  route_id: number | null;
+
+  @Column({ type: 'bigint', name: 'stop_id', nullable: true })
+  stop_id: number | null;
 
   @Column({ type: 'timestamptz' })
   timestamp: Date;
@@ -34,4 +36,12 @@ export class Report {
   @ManyToOne(() => Bus, (bus) => bus.reports)
   @JoinColumn({ name: 'bus_id' })
   bus: Bus;
+
+  @ManyToOne(() => Route)
+  @JoinColumn({ name: 'route_id' })
+  route: Route | null;
+
+  @ManyToOne(() => Stop)
+  @JoinColumn({ name: 'stop_id' })
+  stop: Stop | null;
 }

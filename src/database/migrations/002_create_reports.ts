@@ -6,8 +6,6 @@ export class CreateReports1700000001000 implements MigrationInterface {
       CREATE TABLE reports (
         id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
         bus_id BIGINT NOT NULL,
-        latitude NUMERIC(10,8) NOT NULL,
-        longitude NUMERIC(11,8) NOT NULL,
         passenger_count INT NOT NULL DEFAULT 0,
         timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
