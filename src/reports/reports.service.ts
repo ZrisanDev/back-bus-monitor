@@ -1,4 +1,4 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 import { Report } from './entities/report.entity';
@@ -47,6 +47,12 @@ export class ReportsService {
       if (assignment) {
         resolvedRouteId = Number(assignment.route_id);
       }
+    }
+
+    if (!resolvedRouteId) {
+      throw new BadRequestException(
+        `El bus ${busId} no tiene una ruta asignada. Asigne una ruta al bus o envíe route_id en el body.`,
+      );
     }
 
     if (resolvedRouteId) {
