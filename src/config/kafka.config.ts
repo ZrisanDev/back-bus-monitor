@@ -34,12 +34,12 @@ export function resolveKafkaConfig(
 /**
  * Build NestJS microservice transport options from a resolved KafkaConfig.
  *
- * Uses Transport.KAFKA (enum value 4) directly to avoid importing
+ * Uses Transport.KAFKA (enum value 6) directly to avoid importing
  * @nestjs/microservices in the config layer — keeping it a pure function.
  */
 export function buildKafkaMicroserviceOptions(config: KafkaConfig) {
   return {
-    transport: 4, // Transport.KAFKA
+    transport: 6, // Transport.KAFKA
     options: {
       client: {
         brokers: config.brokers,

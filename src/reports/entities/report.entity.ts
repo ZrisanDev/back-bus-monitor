@@ -33,6 +33,15 @@ export class Report {
   @Column({ type: 'decimal', precision: 11, scale: 8 })
   longitude: number;
 
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  status: string | null;
+
+  @Column({ type: 'varchar', length: 100, nullable: true, name: 'current_stop' })
+  current_stop: string | null;
+
+  @Column({ type: 'varchar', length: 100, nullable: true, name: 'next_stop' })
+  next_stop: string | null;
+
   @Column({ type: 'timestamptz' })
   timestamp: Date;
 

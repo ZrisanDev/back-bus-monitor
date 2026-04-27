@@ -1,0 +1,89 @@
+{
+  "generated_at_utc": "2026-04-25T23:56:06.572440+00:00",
+  "source": {
+    "paraderos": {
+      "horario_url": "https://metrolima.info/metropolitano/horario/",
+      "maps_api": "https://metrolima.info/wp-json/wpgmza/v1/maps",
+      "markers_api": "https://metrolima.info/wp-json/wpgmza/v1/markers"
+    }
+  },
+  "routes_seed": [
+    {
+      "seed_order": 1,
+      "name": "Expreso 1"
+    }
+  ],
+  "stops_catalog_seed": [
+    {
+      "name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339
+    },
+    {
+      "name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612
+    },
+    {
+      "name": "Balta",
+      "lat": -12.1370961,
+      "lng": -77.0177714
+    },
+    {
+      "name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999
+    },
+    {
+      "name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527
+    },
+    {
+      "name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999
+    },
+    {
+      "name": "Estadio Unión",
+      "lat": -12.1529242,
+      "lng": -77.01969050000001
+    },
+    {
+      "name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419
+    },
+    {
+      "name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353
+    },
+    {
+      "name": "Teran",
+      "lat": -12.1683527,
+      "lng": -77.0187696
+    }
+  ],
+  "route_stops_seed": [
+    { "route_name": "Expreso 1", "stop_order": 1,  "stop_name": "Estación Central" },
+    { "route_name": "Expreso 1", "stop_order": 2,  "stop_name": "Estadio Nacional" },
+    { "route_name": "Expreso 1", "stop_order": 3,  "stop_name": "Javier Prado" },
+    { "route_name": "Expreso 1", "stop_order": 4,  "stop_name": "Canaval Moreyra" },
+    { "route_name": "Expreso 1", "stop_order": 5,  "stop_name": "Angamos" },
+    { "route_name": "Expreso 1", "stop_order": 6,  "stop_name": "28 de Julio" },
+    { "route_name": "Expreso 1", "stop_order": 7,  "stop_name": "Balta" },
+    { "route_name": "Expreso 1", "stop_order": 8,  "stop_name": "Estadio Unión" },
+    { "route_name": "Expreso 1", "stop_order": 9,  "stop_name": "Teran" },
+    { "route_name": "Expreso 1", "stop_order": 10, "stop_name": "Matellini" }
+  ],
+  "notes": [
+    "Direcciones eliminadas — ruta única Expreso 1 con 10 paraderos.",
+    "Schedules eliminados — sin lógica de horarios por día/tipo."
+  ],
+  "stats": {
+    "routes_count": 1,
+    "unique_stops_count": 10,
+    "route_stops_count": 10
+  }
+}

@@ -273,8 +273,8 @@ describe('RoutesService', () => {
       const route = makeRoute({ id: 1 });
       mockRepository.findOneBy.mockResolvedValue(route);
       mockRouteStopRepository.find.mockResolvedValue([
-        { id: 1, route_id: 1, stop_id: 10, direction_id: 1, stop_order: 1, stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 } },
-        { id: 2, route_id: 1, stop_id: 20, direction_id: 1, stop_order: 2, stop: { id: 20, name: 'Stop B', latitude: -12.1, longitude: -77.1 } },
+        { id: 1, route_id: 1, stop_id: 10, stop_order: 1, stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 } },
+        { id: 2, route_id: 1, stop_id: 20, stop_order: 2, stop: { id: 20, name: 'Stop B', latitude: -12.1, longitude: -77.1 } },
       ]);
 
       const result = await service.findStopsByRoute(1);
@@ -324,50 +324,141 @@ describe('RoutesService', () => {
   });
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // TASK 2.3: findGeoJsonByRoute — GeoJSON LineString + Points
+  // REQ-RG-001: findGeoJsonByRoute — concatenated segment LineStrings + Points
   // ═══════════════════════════════════════════════════════════════════════════
 
   describe('findGeoJsonByRoute', () => {
-    // ── SCN: Returns valid GeoJSON with LineString and Points ──────────────
+    // ── SCN: Concatenates segment geometries into single LineString (REQ-RG-001)
 
-    it('should return GeoJSON FeatureCollection with LineString and Point features', async () => {
+    it('should concatenate segment_geometry LineStrings into single FeatureCollection', async () => {
       const route = makeRoute({ id: 1, name: 'Expreso 1' });
       mockRepository.findOneBy.mockResolvedValue(route);
+      // S1→S2 segment: [[A,B], [B,C]]  S2→S3 segment: [[C,D], [D,E]]  S3 last: null
       mockRouteStopRepository.find.mockResolvedValue([
-        { id: 1, route_id: 1, stop_id: 10, direction_id: 1, stop_order: 1, stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 } },
-        { id: 2, route_id: 1, stop_id: 20, direction_id: 1, stop_order: 2, stop: { id: 20, name: 'Stop B', latitude: -12.1, longitude: -77.1 } },
+        {
+          id: 1, route_id: 1, stop_id: 10, stop_order: 1,
+          segment_geometry: { type: 'LineString', coordinates: [[-77.0, -12.0], [-77.05, -12.05]] },
+          stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 },
+        },
+        {
+          id: 2, route_id: 1, stop_id: 20, stop_order: 2,
+          segment_geometry: { type: 'LineString', coordinates: [[-77.05, -12.05], [-77.1, -12.1]] },
+          stop: { id: 20, name: 'Stop B', latitude: -12.1, longitude: -77.1 },
+        },
+        {
+          id: 3, route_id: 1, stop_id: 30, stop_order: 3,
+          segment_geometry: null,
+          stop: { id: 30, name: 'Stop C', latitude: -12.15, longitude: -77.15 },
+        },
       ]);
 
       const result = await service.findGeoJsonByRoute(1);
 
       expect(result.type).toBe('FeatureCollection');
-      expect(result.features).toHaveLength(3); // 1 LineString + 2 Points
+      // 1 LineString + 3 Points
+      expect(result.features).toHaveLength(4);
 
-      // LineString feature
-      const lineStringFeature = result.features.find((f: any) => f.geometry.type === 'LineString');
-      expect(lineStringFeature).toBeDefined();
-      expect(lineStringFeature.geometry.coordinates).toEqual([
+      // LineString feature — concatenated, deduped at junction
+      const lineFeature = result.features.find((f: any) => f.geometry.type === 'LineString');
+      expect(lineFeature).toBeDefined();
+      expect(lineFeature.geometry.coordinates).toEqual([
         [-77.0, -12.0],
+        [-77.05, -12.05],
         [-77.1, -12.1],
       ]);
-      expect(lineStringFeature.properties.route_name).toBe('Expreso 1');
+      expect(lineFeature.properties.route_id).toBe(1);
+      expect(lineFeature.properties.route_name).toBe('Expreso 1');
 
-      // Point features
+      // Point features — one per stop
       const pointFeatures = result.features.filter((f: any) => f.geometry.type === 'Point');
-      expect(pointFeatures).toHaveLength(2);
-      expect(pointFeatures[0].geometry.coordinates).toEqual([-77.0, -12.0]);
-      expect(pointFeatures[0].properties.name).toBe('Stop A');
-      expect(pointFeatures[1].geometry.coordinates).toEqual([-77.1, -12.1]);
-      expect(pointFeatures[1].properties.name).toBe('Stop B');
+      expect(pointFeatures).toHaveLength(3);
+      expect(pointFeatures[0].properties.stop_id).toBe(10);
+      expect(pointFeatures[0].properties.stop_name).toBe('Stop A');
+      expect(pointFeatures[0].properties.order).toBe(1);
+      expect(pointFeatures[1].properties.stop_id).toBe(20);
+      expect(pointFeatures[2].properties.stop_id).toBe(30);
     });
 
-    // ── SCN: Coordinates are [longitude, latitude] ─────────────────────────
+    // ── SCN: Junction point deduplication (REQ-RG-001)
 
-    it('should use [longitude, latitude] coordinate order in GeoJSON', async () => {
+    it('should NOT duplicate the junction point when concatenating segments', async () => {
       const route = makeRoute({ id: 1, name: 'Ruta 1' });
       mockRepository.findOneBy.mockResolvedValue(route);
       mockRouteStopRepository.find.mockResolvedValue([
-        { id: 1, route_id: 1, stop_id: 10, direction_id: 1, stop_order: 1, stop: { id: 10, name: 'Terminal', latitude: -12.05, longitude: -77.03 } },
+        {
+          id: 1, route_id: 1, stop_id: 10, stop_order: 1,
+          segment_geometry: { type: 'LineString', coordinates: [[-77.0, -12.0], [-77.05, -12.05], [-77.08, -12.08]] },
+          stop: { id: 10, name: 'S1', latitude: -12.0, longitude: -77.0 },
+        },
+        {
+          id: 2, route_id: 1, stop_id: 20, stop_order: 2,
+          // First coord [-77.08, -12.08] equals last of previous — should be deduped
+          segment_geometry: { type: 'LineString', coordinates: [[-77.08, -12.08], [-77.12, -12.12]] },
+          stop: { id: 20, name: 'S2', latitude: -12.12, longitude: -77.12 },
+        },
+        {
+          id: 3, route_id: 1, stop_id: 30, stop_order: 3,
+          segment_geometry: null,
+          stop: { id: 30, name: 'S3', latitude: -12.15, longitude: -77.15 },
+        },
+      ]);
+
+      const result = await service.findGeoJsonByRoute(1);
+
+      const lineFeature = result.features.find((f: any) => f.geometry.type === 'LineString');
+      // 3 + 2 - 1 (deduped junction) = 4 unique coords
+      expect(lineFeature.geometry.coordinates).toEqual([
+        [-77.0, -12.0],
+        [-77.05, -12.05],
+        [-77.08, -12.08],
+        [-77.12, -12.12],
+      ]);
+    });
+
+    // ── SCN: Point feature properties include stop_id, stop_name, order (REQ-RG-001)
+
+    it('should include stop_id, stop_name, and order in Point feature properties', async () => {
+      const route = makeRoute({ id: 1, name: 'Ruta X' });
+      mockRepository.findOneBy.mockResolvedValue(route);
+      mockRouteStopRepository.find.mockResolvedValue([
+        {
+          id: 1, route_id: 1, stop_id: 10, stop_order: 5,
+          segment_geometry: { type: 'LineString', coordinates: [[-77.0, -12.0], [-77.05, -12.05]] },
+          stop: { id: 10, name: 'Terminal Norte', latitude: -12.0, longitude: -77.0 },
+        },
+        {
+          id: 2, route_id: 1, stop_id: 20, stop_order: 6,
+          segment_geometry: null,
+          stop: { id: 20, name: 'Terminal Sur', latitude: -12.1, longitude: -77.1 },
+        },
+      ]);
+
+      const result = await service.findGeoJsonByRoute(1);
+
+      const pointFeatures = result.features.filter((f: any) => f.geometry.type === 'Point');
+      expect(pointFeatures[0].properties).toEqual({
+        stop_id: 10,
+        stop_name: 'Terminal Norte',
+        order: 5,
+      });
+      expect(pointFeatures[1].properties).toEqual({
+        stop_id: 20,
+        stop_name: 'Terminal Sur',
+        order: 6,
+      });
+    });
+
+    // ── SCN: Point coordinates are [longitude, latitude] (REQ-RG-001)
+
+    it('should use [longitude, latitude] coordinate order in Point features', async () => {
+      const route = makeRoute({ id: 1, name: 'Ruta 1' });
+      mockRepository.findOneBy.mockResolvedValue(route);
+      mockRouteStopRepository.find.mockResolvedValue([
+        {
+          id: 1, route_id: 1, stop_id: 10, stop_order: 1,
+          segment_geometry: null,
+          stop: { id: 10, name: 'Terminal', latitude: -12.05, longitude: -77.03 },
+        },
       ]);
 
       const result = await service.findGeoJsonByRoute(1);
@@ -377,7 +468,7 @@ describe('RoutesService', () => {
       expect(point.geometry.coordinates[1]).toBe(-12.05); // latitude second
     });
 
-    // ── SCN: 404 for non-existent route ────────────────────────────────────
+    // ── SCN: 404 for non-existent route (REQ-RG-005)
 
     it('should throw NotFoundException for non-existent route', async () => {
       mockRepository.findOneBy.mockResolvedValue(null);
@@ -387,7 +478,7 @@ describe('RoutesService', () => {
       );
     });
 
-    // ── SCN: Empty route returns FeatureCollection with no features ────────
+    // ── SCN: Empty route returns FeatureCollection with no features
 
     it('should return empty FeatureCollection for route with no stops', async () => {
       const route = makeRoute({ id: 1, name: 'Empty Route' });
@@ -400,22 +491,109 @@ describe('RoutesService', () => {
       expect(result.features).toEqual([]);
     });
 
-    // ── SCN: Triangulation — different route data ──────────────────────────
+    // ── SCN: All stops have null segment_geometry → no LineString feature
 
-    it('should return correct GeoJSON for different route', async () => {
+    it('should return only Point features when all segment_geometries are null', async () => {
+      const route = makeRoute({ id: 1, name: 'No Geometry' });
+      mockRepository.findOneBy.mockResolvedValue(route);
+      mockRouteStopRepository.find.mockResolvedValue([
+        {
+          id: 1, route_id: 1, stop_id: 10, stop_order: 1,
+          segment_geometry: null,
+          stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 },
+        },
+        {
+          id: 2, route_id: 1, stop_id: 20, stop_order: 2,
+          segment_geometry: null,
+          stop: { id: 20, name: 'Stop B', latitude: -12.1, longitude: -77.1 },
+        },
+      ]);
+
+      const result = await service.findGeoJsonByRoute(1);
+
+      expect(result.type).toBe('FeatureCollection');
+      const lineFeature = result.features.find((f: any) => f.geometry.type === 'LineString');
+      expect(lineFeature).toBeUndefined();
+      const pointFeatures = result.features.filter((f: any) => f.geometry.type === 'Point');
+      expect(pointFeatures).toHaveLength(2);
+    });
+
+    // ── SCN: Triangulation — different route, longer segments
+
+    it('should concatenate longer segments correctly for different route', async () => {
       const route = makeRoute({ id: 2, name: 'Expreso 2' });
       mockRepository.findOneBy.mockResolvedValue(route);
       mockRouteStopRepository.find.mockResolvedValue([
-        { id: 3, route_id: 2, stop_id: 30, direction_id: 2, stop_order: 1, stop: { id: 30, name: 'Javier Prado', latitude: -12.09, longitude: -76.97 } },
+        {
+          id: 3, route_id: 2, stop_id: 30, stop_order: 1,
+          segment_geometry: { type: 'LineString', coordinates: [[-76.9, -12.0], [-76.95, -12.05], [-77.0, -12.1]] },
+          stop: { id: 30, name: 'Javier Prado', latitude: -12.0, longitude: -76.9 },
+        },
+        {
+          id: 4, route_id: 2, stop_id: 40, stop_order: 2,
+          segment_geometry: null,
+          stop: { id: 40, name: ' Centro', latitude: -12.1, longitude: -77.0 },
+        },
       ]);
 
       const result = await service.findGeoJsonByRoute(2);
 
-      expect(result.features).toHaveLength(2); // 1 LineString + 1 Point
       const lineFeature = result.features.find((f: any) => f.geometry.type === 'LineString');
       expect(lineFeature.properties.route_name).toBe('Expreso 2');
-      const pointFeature = result.features.find((f: any) => f.geometry.type === 'Point');
-      expect(pointFeature.properties.name).toBe('Javier Prado');
+      expect(lineFeature.geometry.coordinates).toEqual([
+        [-76.9, -12.0],
+        [-76.95, -12.05],
+        [-77.0, -12.1],
+      ]);
+      const pointFeatures = result.features.filter((f: any) => f.geometry.type === 'Point');
+      expect(pointFeatures).toHaveLength(2);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // findSegmentByOrder
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  describe('findSegmentByOrder', () => {
+    it('should return a Feature for valid stop order with segment geometry', async () => {
+      const route = makeRoute({ id: 1, name: 'Expreso 1' });
+      mockRepository.findOneBy.mockResolvedValue(route);
+      mockRouteStopRepository.find.mockResolvedValue([
+        { id: 1, route_id: 1, stop_id: 10, stop_order: 1, segment_geometry: { type: 'LineString', coordinates: [[-77.0, -12.0], [-77.05, -12.05], [-77.1, -12.1]] }, stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 } },
+        { id: 2, route_id: 1, stop_id: 20, stop_order: 2, segment_geometry: null, stop: { id: 20, name: 'Stop B', latitude: -12.05, longitude: -77.05 } },
+      ]);
+
+      const result = await service.findSegmentByOrder(1, 1);
+
+      expect(result.type).toBe('Feature');
+      expect(result.geometry.type).toBe('LineString');
+      expect(result.geometry.coordinates).toHaveLength(3);
+      expect(result.properties.route_name).toBe('Expreso 1');
+    });
+
+    it('should throw NotFoundException for non-existent stop order', async () => {
+      const route = makeRoute({ id: 1 });
+      mockRepository.findOneBy.mockResolvedValue(route);
+      mockRouteStopRepository.find.mockResolvedValue([
+        { id: 1, route_id: 1, stop_id: 10, stop_order: 1, segment_geometry: null, stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 } },
+      ]);
+
+      await expect(service.findSegmentByOrder(1, 99)).rejects.toThrow(NotFoundException);
+    });
+
+    it('should throw NotFoundException when segment geometry is null', async () => {
+      const route = makeRoute({ id: 1 });
+      mockRepository.findOneBy.mockResolvedValue(route);
+      mockRouteStopRepository.find.mockResolvedValue([
+        { id: 1, route_id: 1, stop_id: 10, stop_order: 1, segment_geometry: null, stop: { id: 10, name: 'Stop A', latitude: -12.0, longitude: -77.0 } },
+      ]);
+
+      await expect(service.findSegmentByOrder(1, 1)).rejects.toThrow(NotFoundException);
+    });
+
+    it('should throw NotFoundException for non-existent route', async () => {
+      mockRepository.findOneBy.mockResolvedValue(null);
+      await expect(service.findSegmentByOrder(9999, 1)).rejects.toThrow(NotFoundException);
     });
   });
 });

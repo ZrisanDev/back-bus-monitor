@@ -24,6 +24,9 @@ export class ReportsTelemetryConsumer {
       longitude: number;
       passenger_count: number;
       timestamp: string;
+      status: string;
+      current_stop: string;
+      next_stop: string | null;
     },
   ): Promise<any> {
     this.logger.log(
@@ -38,6 +41,9 @@ export class ReportsTelemetryConsumer {
         stop_id: payload.stop_id,
         latitude: payload.latitude,
         longitude: payload.longitude,
+        status: payload.status,
+        current_stop: payload.current_stop,
+        next_stop: payload.next_stop,
       },
     );
 
@@ -58,6 +64,9 @@ export class ReportsTelemetryConsumer {
         passenger_count: payload.passenger_count,
         occupancy_percentage: occupancyPercentage,
         timestamp: payload.timestamp,
+        status: payload.status,
+        current_stop: payload.current_stop,
+        next_stop: payload.next_stop,
       });
     }
 

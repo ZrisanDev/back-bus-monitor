@@ -347,7 +347,7 @@ describe('BusAssignmentsService', () => {
       const result = await service.findActiveByBusId(10);
 
       expect(result).toEqual(active);
-      expect(result.unassigned_at).toBeNull();
+      expect(result!.unassigned_at).toBeNull();
     });
 
     it('should return null when bus has no active assignment', async () => {
@@ -375,8 +375,8 @@ describe('BusAssignmentsService', () => {
 
       const result = await service.findActiveByBusId(42);
 
-      expect(result.bus_id).toBe(42);
-      expect(result.route_id).toBe(5);
+      expect(result!.bus_id).toBe(42);
+      expect(result!.route_id).toBe(5);
     });
   });
 

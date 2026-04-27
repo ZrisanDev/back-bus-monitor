@@ -1,4 +1,4 @@
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { RoutesModule } from '../routes.module';
 import { RoutesService } from '../routes.service';
@@ -7,7 +7,7 @@ import { Route } from '../entities/route.entity';
 import { RouteStop } from '../../route-stops/entities/route-stop.entity';
 
 describe('RoutesModule', () => {
-  let module: any;
+  let module: TestingModule;
 
   beforeEach(async () => {
     module = await Test.createTestingModule({

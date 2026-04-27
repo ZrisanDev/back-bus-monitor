@@ -20,6 +20,8 @@ describe('MaxPassengersValidator', () => {
 
   const makeDto = (overrides: Partial<CreateReportDto> = {}): CreateReportDto => ({
     passenger_count: 22,
+    latitude: -12.04,
+    longitude: -77.03,
     ...overrides,
   });
 

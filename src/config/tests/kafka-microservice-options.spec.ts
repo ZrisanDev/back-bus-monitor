@@ -12,7 +12,7 @@ describe('buildKafkaMicroserviceOptions', () => {
     });
 
     expect(options).toEqual({
-      transport: 4, // Transport.KAFKA enum value
+      transport: 6, // Transport.KAFKA enum value
       options: {
         client: {
           brokers: ['kafka:29092'],

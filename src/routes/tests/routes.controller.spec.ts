@@ -31,6 +31,7 @@ describe('RoutesController', () => {
             remove: jest.fn(),
             findStopsByRoute: jest.fn(),
             findGeoJsonByRoute: jest.fn(),
+            findSegmentByOrder: jest.fn(),
           },
         },
       ],
@@ -191,6 +192,72 @@ describe('RoutesController', () => {
       await controller.findGeoJsonByRoute('5');
 
       expect(service.findGeoJsonByRoute).toHaveBeenCalledWith(5);
+    });
+
+    // ── SCN: 404 for non-existent route (REQ-RG-005)
+
+    it('should propagate NotFoundException for non-existent route', async () => {
+      const { NotFoundException } = await import('@nestjs/common');
+      jest.spyOn(service, 'findGeoJsonByRoute').mockRejectedValue(
+        new NotFoundException('Ruta con ID 9999 no encontrada'),
+      );
+
+      await expect(controller.findGeoJsonByRoute('9999')).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // REQ-RG-003/004/006: GET /routes/:id/segment/:order
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('findSegmentByOrder', () => {
+    // ── SCN: Returns 200 with Feature for valid order (REQ-RG-003)
+
+    it('should call service.findSegmentByOrder with parsed params and return result', async () => {
+      const feature = {
+        type: 'Feature',
+        geometry: { type: 'LineString', coordinates: [[-77.0, -12.0], [-77.1, -12.1]] },
+        properties: { route_id: 1, route_name: 'Test', stop_id: 10, stop_name: 'Stop A', order: 1 },
+      };
+      jest.spyOn(service, 'findSegmentByOrder').mockResolvedValue(feature);
+
+      const result = await controller.findSegmentByOrder('1', '1');
+
+      expect(result).toEqual(feature);
+      expect(service.findSegmentByOrder).toHaveBeenCalledWith(1, 1);
+    });
+
+    // ── SCN: 404 for last stop null geometry (REQ-RG-004)
+
+    it('should propagate NotFoundException from service for null geometry', async () => {
+      const { NotFoundException } = await import('@nestjs/common');
+      jest.spyOn(service, 'findSegmentByOrder').mockRejectedValue(
+        new NotFoundException('Segment geometry no disponible'),
+      );
+
+      await expect(controller.findSegmentByOrder('1', '2')).rejects.toThrow(NotFoundException);
+    });
+
+    // ── SCN: 404 for invalid order (REQ-RG-006)
+
+    it('should propagate NotFoundException from service for invalid order', async () => {
+      const { NotFoundException } = await import('@nestjs/common');
+      jest.spyOn(service, 'findSegmentByOrder').mockRejectedValue(
+        new NotFoundException('Stop order 99 no encontrado'),
+      );
+
+      await expect(controller.findSegmentByOrder('1', '99')).rejects.toThrow(NotFoundException);
+    });
+
+    // ── SCN: Triangulation — different route and order
+
+    it('should parse different route and order params correctly', async () => {
+      const feature = { type: 'Feature', geometry: { type: 'LineString', coordinates: [] }, properties: {} };
+      jest.spyOn(service, 'findSegmentByOrder').mockResolvedValue(feature);
+
+      await controller.findSegmentByOrder('5', '3');
+
+      expect(service.findSegmentByOrder).toHaveBeenCalledWith(5, 3);
     });
   });
 });

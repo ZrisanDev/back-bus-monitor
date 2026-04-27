@@ -12,6 +12,7 @@ describe('Report Entity', () => {
     capacity: 40,
     created_at: new Date('2025-01-01T00:00:00.000Z'),
     updated_at: new Date('2025-01-01T00:00:00.000Z'),
+    reports: [],
     ...overrides,
   });
 

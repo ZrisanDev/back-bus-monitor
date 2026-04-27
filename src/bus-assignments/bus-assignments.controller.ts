@@ -12,19 +12,24 @@ import {
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { CreateBusAssignmentDto } from './dto/create-bus-assignment.dto';
 import { UpdateBusAssignmentDto } from './dto/update-bus-assignment.dto';
+// import { BusAssignmentsService } from './bus-assignments.service';
 
 @ApiTags('bus-assignments')
 @Controller('bus-assignments')
 export class BusAssignmentsController {
   constructor(
-    @Inject('IBusAssignmentsService') private readonly assignmentsService: any,
+    @Inject('IBusAssignmentsService')
+    private readonly assignmentsService: any,
   ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new bus assignment' })
   @ApiResponse({ status: 201, description: 'Assignment created successfully' })
   @ApiResponse({ status: 400, description: 'Bad request' })
-  @ApiResponse({ status: 409, description: 'Bus already has an active assignment' })
+  @ApiResponse({
+    status: 409,
+    description: 'Bus already has an active assignment',
+  })
   create(@Body() dto: CreateBusAssignmentDto) {
     return this.assignmentsService.create(dto);
   }
@@ -37,7 +42,11 @@ export class BusAssignmentsController {
     @Query('route_id') routeId?: string,
     @Query('active_only') activeOnly?: string,
   ) {
-    const filters: { bus_id?: number; route_id?: number; active_only?: boolean } = {};
+    const filters: {
+      bus_id?: number;
+      route_id?: number;
+      active_only?: boolean;
+    } = {};
     if (busId !== undefined) filters.bus_id = Number(busId);
     if (routeId !== undefined) filters.route_id = Number(routeId);
     if (activeOnly !== undefined) filters.active_only = activeOnly === 'true';

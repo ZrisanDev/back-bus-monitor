@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { Route } from '../../routes/entities/route.entity';
 import { Stop } from '../../stops/entities/stop.entity';
-import { Direction } from '../../directions/entities/direction.entity';
+import { GeoJsonLineString } from '../../common/types/geojson';
 
 @Entity('route_stops')
 export class RouteStop {
@@ -22,11 +22,11 @@ export class RouteStop {
   @Column({ type: 'bigint', name: 'stop_id' })
   stop_id: number;
 
-  @Column({ type: 'bigint', name: 'direction_id' })
-  direction_id: number;
-
   @Column({ type: 'integer', name: 'stop_order' })
   stop_order: number;
+
+  @Column({ type: 'jsonb', name: 'segment_geometry', nullable: true })
+  segment_geometry: GeoJsonLineString | null;
 
   @CreateDateColumn({ type: 'timestamptz', name: 'created_at' })
   created_at: Date;
@@ -41,8 +41,4 @@ export class RouteStop {
   @ManyToOne(() => Stop)
   @JoinColumn({ name: 'stop_id' })
   stop: Stop;
-
-  @ManyToOne(() => Direction)
-  @JoinColumn({ name: 'direction_id' })
-  direction: Direction;
 }

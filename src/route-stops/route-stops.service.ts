@@ -14,27 +14,25 @@ export class RouteStopsService implements IRouteStopsService {
   ) {}
 
   async create(dto: CreateRouteStopDto): Promise<RouteStop> {
-    // Check UNIQUE(route_id, stop_id, direction_id)
+    // Check UNIQUE(route_id, stop_id)
     const existingCombination = await this.routeStopRepository.findOneBy({
       route_id: dto.route_id,
       stop_id: dto.stop_id,
-      direction_id: dto.direction_id,
     });
     if (existingCombination) {
       throw new ConflictException(
-        `Ya existe la combinación de ruta ${dto.route_id}, parada ${dto.stop_id} y dirección ${dto.direction_id}`,
+        `Ya existe la combinación de ruta ${dto.route_id} y parada ${dto.stop_id}`,
       );
     }
 
-    // Check UNIQUE(route_id, direction_id, stop_order)
+    // Check UNIQUE(route_id, stop_order)
     const existingOrder = await this.routeStopRepository.findOneBy({
       route_id: dto.route_id,
-      direction_id: dto.direction_id,
       stop_order: dto.stop_order,
     });
     if (existingOrder) {
       throw new ConflictException(
-        `Ya existe una parada con orden ${dto.stop_order} para la ruta ${dto.route_id} y dirección ${dto.direction_id}`,
+        `Ya existe una parada con orden ${dto.stop_order} para la ruta ${dto.route_id}`,
       );
     }
 

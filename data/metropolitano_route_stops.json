@@ -1,0 +1,4257 @@
+{
+  "generated_at_utc": "2026-04-26T00:16:47.673826+00:00",
+  "source": {
+    "horario_url": "https://metrolima.info/metropolitano/horario/",
+    "maps_api": "https://metrolima.info/wp-json/wpgmza/v1/maps",
+    "markers_api": "https://metrolima.info/wp-json/wpgmza/v1/markers"
+  },
+  "notes": [
+    "Los paraderos se extrajeron del API público de mapas (WPGMZA) del sitio.",
+    "El orden de paraderos se infirió automáticamente por latitud para construir stop_order (NORTE_SUR = latitud descendente; SUR_NORTE = inverso).",
+    "Si necesitas orden operacional exacto por sentido, conviene validarlo manualmente antes de insertar en route_stops."
+  ],
+  "routes_summary": [
+    {
+      "route_name": "Expreso 1",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-1/",
+      "source_map_id": 26,
+      "unique_stops_count": 10,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 10",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-10/",
+      "source_map_id": 43,
+      "unique_stops_count": 8,
+      "direction_codes": [
+        "NORTE_SUR"
+      ]
+    },
+    {
+      "route_name": "Expreso 11",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-11/",
+      "source_map_id": 38,
+      "unique_stops_count": 7,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 12",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-12/",
+      "source_map_id": 41,
+      "unique_stops_count": 5,
+      "direction_codes": [
+        "NORTE_SUR"
+      ]
+    },
+    {
+      "route_name": "Expreso 13",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-13/",
+      "source_map_id": 39,
+      "unique_stops_count": 5,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 2",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-2/",
+      "source_map_id": 19,
+      "unique_stops_count": 5,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 3",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-3/",
+      "source_map_id": 25,
+      "unique_stops_count": 3,
+      "direction_codes": [
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 5",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-5/",
+      "source_map_id": 17,
+      "unique_stops_count": 13,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 6",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-6/",
+      "source_map_id": 27,
+      "unique_stops_count": 7,
+      "direction_codes": [
+        "NORTE_SUR"
+      ]
+    },
+    {
+      "route_name": "Expreso 7",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-7/",
+      "source_map_id": 22,
+      "unique_stops_count": 5,
+      "direction_codes": [
+        "NORTE_SUR"
+      ]
+    },
+    {
+      "route_name": "Expreso 8",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-8/",
+      "source_map_id": 23,
+      "unique_stops_count": 10,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Expreso 9",
+      "guide_url": "https://metrolima.info/metropolitano/expreso-9/",
+      "source_map_id": 24,
+      "unique_stops_count": 9,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Lechucero",
+      "guide_url": "https://metrolima.info/metropolitano/lechucero/",
+      "source_map_id": 31,
+      "unique_stops_count": 9,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Línea A",
+      "guide_url": "https://metrolima.info/metropolitano/ruta-a/",
+      "source_map_id": 21,
+      "unique_stops_count": 17,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Línea B",
+      "guide_url": "https://metrolima.info/metropolitano/ruta-b/",
+      "source_map_id": 18,
+      "unique_stops_count": 19,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Línea C",
+      "guide_url": "https://metrolima.info/metropolitano/ruta-c/",
+      "source_map_id": 20,
+      "unique_stops_count": 25,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Línea D",
+      "guide_url": "https://metrolima.info/metropolitano/ruta-d/",
+      "source_map_id": 28,
+      "unique_stops_count": 14,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Súper Expreso",
+      "guide_url": "https://metrolima.info/metropolitano/super-expreso/",
+      "source_map_id": 29,
+      "unique_stops_count": 6,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "guide_url": "https://metrolima.info/metropolitano/super-expreso-norte/",
+      "source_map_id": 30,
+      "unique_stops_count": 5,
+      "direction_codes": [
+        "NORTE_SUR",
+        "SUR_NORTE"
+      ]
+    }
+  ],
+  "stops_catalog_seed": [
+    {
+      "name": "2 de Mayo",
+      "lat": -12.047436,
+      "lng": -77.04266799999999
+    },
+    {
+      "name": "22 de Agosto",
+      "lat": -11.9466452,
+      "lng": -77.0605922
+    },
+    {
+      "name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339
+    },
+    {
+      "name": "Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999
+    },
+    {
+      "name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612
+    },
+    {
+      "name": "Aramburú",
+      "lat": -12.1034624,
+      "lng": -77.0273862
+    },
+    {
+      "name": "Balta",
+      "lat": -12.1370961,
+      "lng": -77.0177714
+    },
+    {
+      "name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088
+    },
+    {
+      "name": "Bulevar",
+      "lat": -12.1446776,
+      "lng": -77.0220144
+    },
+    {
+      "name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999
+    },
+    {
+      "name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999
+    },
+    {
+      "name": "Canaval y Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999
+    },
+    {
+      "name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608
+    },
+    {
+      "name": "Chimpu Ocllo",
+      "lat": -11.8963694,
+      "lng": -77.03738940000001
+    },
+    {
+      "name": "Colmena",
+      "lat": -12.0523963,
+      "lng": -77.0329065
+    },
+    {
+      "name": "Domingo Orué",
+      "lat": -12.1085005,
+      "lng": -77.0264381
+    },
+    {
+      "name": "El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399
+    },
+    {
+      "name": "Escuela Militar",
+      "lat": -12.1594717,
+      "lng": -77.0189075
+    },
+    {
+      "name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326
+    },
+    {
+      "name": "Estación 22 de Agosto",
+      "lat": -11.9466452,
+      "lng": -77.0605922
+    },
+    {
+      "name": "Estación Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999
+    },
+    {
+      "name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612
+    },
+    {
+      "name": "Estación Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608
+    },
+    {
+      "name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527
+    },
+    {
+      "name": "Estación El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399
+    },
+    {
+      "name": "Estación España",
+      "lat": -12.0577742,
+      "lng": -77.0417326
+    },
+    {
+      "name": "Estación Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378
+    },
+    {
+      "name": "Estación Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743
+    },
+    {
+      "name": "Estación Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219
+    },
+    {
+      "name": "Estación Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489
+    },
+    {
+      "name": "Estación Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147
+    },
+    {
+      "name": "Estación Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999
+    },
+    {
+      "name": "Estación Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303
+    },
+    {
+      "name": "Estación Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424
+    },
+    {
+      "name": "Estación Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932
+    },
+    {
+      "name": "Estación Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999
+    },
+    {
+      "name": "Estación UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999
+    },
+    {
+      "name": "Estación Universidad",
+      "lat": -11.9627856,
+      "lng": -77.0623263
+    },
+    {
+      "name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999
+    },
+    {
+      "name": "Estadio Unión",
+      "lat": -12.1529242,
+      "lng": -77.01969050000001
+    },
+    {
+      "name": "Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378
+    },
+    {
+      "name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743
+    },
+    {
+      "name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219
+    },
+    {
+      "name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419
+    },
+    {
+      "name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889
+    },
+    {
+      "name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001
+    },
+    {
+      "name": "Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489
+    },
+    {
+      "name": "Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147
+    },
+    {
+      "name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353
+    },
+    {
+      "name": "México",
+      "lat": -12.0766412,
+      "lng": -77.02897709999999
+    },
+    {
+      "name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999
+    },
+    {
+      "name": "Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303
+    },
+    {
+      "name": "Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424
+    },
+    {
+      "name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999
+    },
+    {
+      "name": "Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932
+    },
+    {
+      "name": "Ramon Castilla",
+      "lat": -12.0441185,
+      "lng": -77.0408633
+    },
+    {
+      "name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368
+    },
+    {
+      "name": "Rosario de Villa",
+      "lat": -12.1727178,
+      "lng": -77.01541089999999
+    },
+    {
+      "name": "Súper Expreso 28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339
+    },
+    {
+      "name": "Súper Expreso Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612
+    },
+    {
+      "name": "Súper Expreso Aramburú",
+      "lat": -12.1034624,
+      "lng": -77.0273862
+    },
+    {
+      "name": "Súper Expreso Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088
+    },
+    {
+      "name": "Súper Expreso Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999
+    },
+    {
+      "name": "Súper Expreso Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999
+    },
+    {
+      "name": "Tacna",
+      "lat": -12.0465644,
+      "lng": -77.037143
+    },
+    {
+      "name": "Teran",
+      "lat": -12.1683527,
+      "lng": -77.0187696
+    },
+    {
+      "name": "Terminal Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999
+    },
+    {
+      "name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999
+    },
+    {
+      "name": "UNI",
+      "lat": -12.024196,
+      "lng": -77.0488716
+    },
+    {
+      "name": "Universidad",
+      "lat": -11.9627856,
+      "lng": -77.0623263
+    }
+  ],
+  "route_stops_seed": [
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 26,
+      "source_marker_id": 918,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999,
+      "source_map_id": 26,
+      "source_marker_id": 910,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 26,
+      "source_marker_id": 881,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 26,
+      "source_marker_id": 880,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 26,
+      "source_marker_id": 877,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 26,
+      "source_marker_id": 887,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Balta",
+      "lat": -12.1370961,
+      "lng": -77.0177714,
+      "source_map_id": 26,
+      "source_marker_id": 886,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Estadio Unión",
+      "lat": -12.1529242,
+      "lng": -77.01969050000001,
+      "source_map_id": 26,
+      "source_marker_id": 1150,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Teran",
+      "lat": -12.1683527,
+      "lng": -77.0187696,
+      "source_map_id": 26,
+      "source_marker_id": 1149,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353,
+      "source_map_id": 26,
+      "source_marker_id": 917,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353,
+      "source_map_id": 26,
+      "source_marker_id": 917,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Teran",
+      "lat": -12.1683527,
+      "lng": -77.0187696,
+      "source_map_id": 26,
+      "source_marker_id": 1149,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Estadio Unión",
+      "lat": -12.1529242,
+      "lng": -77.01969050000001,
+      "source_map_id": 26,
+      "source_marker_id": 1150,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Balta",
+      "lat": -12.1370961,
+      "lng": -77.0177714,
+      "source_map_id": 26,
+      "source_marker_id": 886,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 26,
+      "source_marker_id": 887,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 26,
+      "source_marker_id": 877,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 26,
+      "source_marker_id": 880,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 26,
+      "source_marker_id": 881,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999,
+      "source_map_id": 26,
+      "source_marker_id": 910,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 1",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 26,
+      "source_marker_id": 918,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 43,
+      "source_marker_id": 1220,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 43,
+      "source_marker_id": 1210,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Ramon Castilla",
+      "lat": -12.0441185,
+      "lng": -77.0408633,
+      "source_map_id": 43,
+      "source_marker_id": 1209,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Tacna",
+      "lat": -12.0465644,
+      "lng": -77.037143,
+      "source_map_id": 43,
+      "source_marker_id": 1208,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 43,
+      "source_marker_id": 1205,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 43,
+      "source_marker_id": 1206,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Colmena",
+      "lat": -12.0523963,
+      "lng": -77.0329065,
+      "source_map_id": 43,
+      "source_marker_id": 1207,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 10",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 43,
+      "source_marker_id": 1221,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489,
+      "source_map_id": 38,
+      "source_marker_id": 1134,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999,
+      "source_map_id": 38,
+      "source_marker_id": 1135,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "22 de Agosto",
+      "lat": -11.9466452,
+      "lng": -77.0605922,
+      "source_map_id": 38,
+      "source_marker_id": 1136,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Universidad",
+      "lat": -11.9627856,
+      "lng": -77.0623263,
+      "source_map_id": 38,
+      "source_marker_id": 1137,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Terminal Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 38,
+      "source_marker_id": 1132,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 38,
+      "source_marker_id": 1138,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 38,
+      "source_marker_id": 1133,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 38,
+      "source_marker_id": 1133,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 38,
+      "source_marker_id": 1138,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Terminal Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 38,
+      "source_marker_id": 1132,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Universidad",
+      "lat": -11.9627856,
+      "lng": -77.0623263,
+      "source_map_id": 38,
+      "source_marker_id": 1137,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "22 de Agosto",
+      "lat": -11.9466452,
+      "lng": -77.0605922,
+      "source_map_id": 38,
+      "source_marker_id": 1136,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999,
+      "source_map_id": 38,
+      "source_marker_id": 1135,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 11",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489,
+      "source_map_id": 38,
+      "source_marker_id": 1134,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 12",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 41,
+      "source_marker_id": 1177,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 12",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999,
+      "source_map_id": 41,
+      "source_marker_id": 1175,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 12",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 41,
+      "source_marker_id": 1172,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 12",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 41,
+      "source_marker_id": 1171,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 12",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 41,
+      "source_marker_id": 1170,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Chimpu Ocllo",
+      "lat": -11.8963694,
+      "lng": -77.03738940000001,
+      "source_map_id": 39,
+      "source_marker_id": 1147,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489,
+      "source_map_id": 39,
+      "source_marker_id": 1142,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999,
+      "source_map_id": 39,
+      "source_marker_id": 1143,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "UNI",
+      "lat": -12.024196,
+      "lng": -77.0488716,
+      "source_map_id": 39,
+      "source_marker_id": 1148,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 39,
+      "source_marker_id": 1141,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 39,
+      "source_marker_id": 1141,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "UNI",
+      "lat": -12.024196,
+      "lng": -77.0488716,
+      "source_map_id": 39,
+      "source_marker_id": 1148,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999,
+      "source_map_id": 39,
+      "source_marker_id": 1143,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489,
+      "source_map_id": 39,
+      "source_marker_id": 1142,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 13",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Chimpu Ocllo",
+      "lat": -11.8963694,
+      "lng": -77.03738940000001,
+      "source_map_id": 39,
+      "source_marker_id": 1147,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 19,
+      "source_marker_id": 613,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 19,
+      "source_marker_id": 609,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 19,
+      "source_marker_id": 578,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 19,
+      "source_marker_id": 586,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 19,
+      "source_marker_id": 584,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 19,
+      "source_marker_id": 584,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 19,
+      "source_marker_id": 586,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 19,
+      "source_marker_id": 578,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 19,
+      "source_marker_id": 609,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 2",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 19,
+      "source_marker_id": 613,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 3",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 25,
+      "source_marker_id": 845,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 3",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 25,
+      "source_marker_id": 834,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 3",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 25,
+      "source_marker_id": 873,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 17,
+      "source_marker_id": 527,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 17,
+      "source_marker_id": 832,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 17,
+      "source_marker_id": 512,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 17,
+      "source_marker_id": 509,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 17,
+      "source_marker_id": 833,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 17,
+      "source_marker_id": 529,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 17,
+      "source_marker_id": 520,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 17,
+      "source_marker_id": 523,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 17,
+      "source_marker_id": 492,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 17,
+      "source_marker_id": 491,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 11,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 17,
+      "source_marker_id": 488,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 12,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 17,
+      "source_marker_id": 500,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 13,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 17,
+      "source_marker_id": 526,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 17,
+      "source_marker_id": 526,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 17,
+      "source_marker_id": 500,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 17,
+      "source_marker_id": 488,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 17,
+      "source_marker_id": 491,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 17,
+      "source_marker_id": 492,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 17,
+      "source_marker_id": 523,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 17,
+      "source_marker_id": 520,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 17,
+      "source_marker_id": 529,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 17,
+      "source_marker_id": 833,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 17,
+      "source_marker_id": 509,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 11,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 17,
+      "source_marker_id": 512,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 12,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 17,
+      "source_marker_id": 832,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 5",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 13,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 17,
+      "source_marker_id": 527,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 27,
+      "source_marker_id": 948,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 27,
+      "source_marker_id": 946,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 27,
+      "source_marker_id": 961,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 27,
+      "source_marker_id": 924,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 27,
+      "source_marker_id": 923,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 27,
+      "source_marker_id": 920,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 6",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 27,
+      "source_marker_id": 931,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 7",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 22,
+      "source_marker_id": 727,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 7",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 22,
+      "source_marker_id": 744,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 7",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 22,
+      "source_marker_id": 707,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 7",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 22,
+      "source_marker_id": 706,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 7",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 22,
+      "source_marker_id": 703,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 23,
+      "source_marker_id": 774,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 23,
+      "source_marker_id": 772,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 23,
+      "source_marker_id": 770,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 23,
+      "source_marker_id": 767,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 23,
+      "source_marker_id": 787,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 23,
+      "source_marker_id": 750,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Canaval y Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 23,
+      "source_marker_id": 749,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 23,
+      "source_marker_id": 746,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 23,
+      "source_marker_id": 757,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 23,
+      "source_marker_id": 784,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 23,
+      "source_marker_id": 784,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 23,
+      "source_marker_id": 757,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 23,
+      "source_marker_id": 746,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Canaval y Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 23,
+      "source_marker_id": 749,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 23,
+      "source_marker_id": 750,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 23,
+      "source_marker_id": 787,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 23,
+      "source_marker_id": 767,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 23,
+      "source_marker_id": 770,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 23,
+      "source_marker_id": 772,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 8",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 23,
+      "source_marker_id": 774,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 24,
+      "source_marker_id": 810,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 24,
+      "source_marker_id": 808,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 24,
+      "source_marker_id": 830,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 24,
+      "source_marker_id": 821,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 24,
+      "source_marker_id": 793,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Canaval y Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 24,
+      "source_marker_id": 792,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 24,
+      "source_marker_id": 789,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 24,
+      "source_marker_id": 800,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 24,
+      "source_marker_id": 827,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 24,
+      "source_marker_id": 827,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 24,
+      "source_marker_id": 800,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 24,
+      "source_marker_id": 789,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Canaval y Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 24,
+      "source_marker_id": 792,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 24,
+      "source_marker_id": 793,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 24,
+      "source_marker_id": 821,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 24,
+      "source_marker_id": 830,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 24,
+      "source_marker_id": 808,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Expreso 9",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 24,
+      "source_marker_id": 810,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 31,
+      "source_marker_id": 1119,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 31,
+      "source_marker_id": 1104,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 31,
+      "source_marker_id": 1101,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 31,
+      "source_marker_id": 1094,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 31,
+      "source_marker_id": 1095,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 31,
+      "source_marker_id": 1115,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 31,
+      "source_marker_id": 1092,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Bulevar",
+      "lat": -12.1446776,
+      "lng": -77.0220144,
+      "source_map_id": 31,
+      "source_marker_id": 1088,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353,
+      "source_map_id": 31,
+      "source_marker_id": 1120,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353,
+      "source_map_id": 31,
+      "source_marker_id": 1120,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Bulevar",
+      "lat": -12.1446776,
+      "lng": -77.0220144,
+      "source_map_id": 31,
+      "source_marker_id": 1088,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 31,
+      "source_marker_id": 1092,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 31,
+      "source_marker_id": 1115,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 31,
+      "source_marker_id": 1095,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 31,
+      "source_marker_id": 1094,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 31,
+      "source_marker_id": 1101,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 31,
+      "source_marker_id": 1104,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Lechucero",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 31,
+      "source_marker_id": 1119,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 21,
+      "source_marker_id": 699,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 21,
+      "source_marker_id": 688,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Pacifico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 21,
+      "source_marker_id": 687,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 21,
+      "source_marker_id": 686,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147,
+      "source_map_id": 21,
+      "source_marker_id": 685,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 21,
+      "source_marker_id": 684,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399,
+      "source_map_id": 21,
+      "source_marker_id": 683,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378,
+      "source_map_id": 21,
+      "source_marker_id": 682,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 21,
+      "source_marker_id": 681,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424,
+      "source_map_id": 21,
+      "source_marker_id": 680,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 11,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 21,
+      "source_marker_id": 679,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 12,
+      "stop_name": "Ramon Castilla",
+      "lat": -12.0441185,
+      "lng": -77.0408633,
+      "source_map_id": 21,
+      "source_marker_id": 678,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 13,
+      "stop_name": "Tacna",
+      "lat": -12.0465644,
+      "lng": -77.037143,
+      "source_map_id": 21,
+      "source_marker_id": 677,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 14,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 21,
+      "source_marker_id": 674,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 15,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 21,
+      "source_marker_id": 675,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 16,
+      "stop_name": "Colmena",
+      "lat": -12.0523963,
+      "lng": -77.0329065,
+      "source_map_id": 21,
+      "source_marker_id": 676,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 17,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 21,
+      "source_marker_id": 701,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 21,
+      "source_marker_id": 701,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Colmena",
+      "lat": -12.0523963,
+      "lng": -77.0329065,
+      "source_map_id": 21,
+      "source_marker_id": 676,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 21,
+      "source_marker_id": 675,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 21,
+      "source_marker_id": 674,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Tacna",
+      "lat": -12.0465644,
+      "lng": -77.037143,
+      "source_map_id": 21,
+      "source_marker_id": 677,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Ramon Castilla",
+      "lat": -12.0441185,
+      "lng": -77.0408633,
+      "source_map_id": 21,
+      "source_marker_id": 678,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 21,
+      "source_marker_id": 679,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424,
+      "source_map_id": 21,
+      "source_marker_id": 680,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 21,
+      "source_marker_id": 681,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378,
+      "source_map_id": 21,
+      "source_marker_id": 682,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 11,
+      "stop_name": "El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399,
+      "source_map_id": 21,
+      "source_marker_id": 683,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 12,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 21,
+      "source_marker_id": 684,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 13,
+      "stop_name": "Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147,
+      "source_map_id": 21,
+      "source_marker_id": 685,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 14,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 21,
+      "source_marker_id": 686,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 15,
+      "stop_name": "Pacifico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 21,
+      "source_marker_id": 687,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 16,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 21,
+      "source_marker_id": 688,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea A",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 17,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 21,
+      "source_marker_id": 699,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Chimpu Ocllo",
+      "lat": -11.8963694,
+      "lng": -77.03738940000001,
+      "source_map_id": 18,
+      "source_marker_id": 1139,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Estación Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489,
+      "source_map_id": 18,
+      "source_marker_id": 532,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Estación Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999,
+      "source_map_id": 18,
+      "source_marker_id": 537,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Estación 22 de Agosto",
+      "lat": -11.9466452,
+      "lng": -77.0605922,
+      "source_map_id": 18,
+      "source_marker_id": 538,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Estación Universidad",
+      "lat": -11.9627856,
+      "lng": -77.0623263,
+      "source_map_id": 18,
+      "source_marker_id": 573,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Estación Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 18,
+      "source_marker_id": 570,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Estación Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 18,
+      "source_marker_id": 559,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Estación Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 18,
+      "source_marker_id": 558,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Estación Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 18,
+      "source_marker_id": 557,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Estación Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147,
+      "source_map_id": 18,
+      "source_marker_id": 556,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 11,
+      "stop_name": "Estación Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 18,
+      "source_marker_id": 555,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 12,
+      "stop_name": "Estación El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399,
+      "source_map_id": 18,
+      "source_marker_id": 554,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 13,
+      "stop_name": "Estación Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378,
+      "source_map_id": 18,
+      "source_marker_id": 553,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 14,
+      "stop_name": "Estación UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 18,
+      "source_marker_id": 552,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 15,
+      "stop_name": "Estación Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424,
+      "source_map_id": 18,
+      "source_marker_id": 551,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 16,
+      "stop_name": "Estación Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 18,
+      "source_marker_id": 550,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 17,
+      "stop_name": "Estación Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932,
+      "source_map_id": 18,
+      "source_marker_id": 562,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 18,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 18,
+      "source_marker_id": 572,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 19,
+      "stop_name": "Estación España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 18,
+      "source_marker_id": 563,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Estación España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 18,
+      "source_marker_id": 563,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 18,
+      "source_marker_id": 572,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Estación Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932,
+      "source_map_id": 18,
+      "source_marker_id": 562,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Estación Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 18,
+      "source_marker_id": 550,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Estación Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424,
+      "source_map_id": 18,
+      "source_marker_id": 551,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Estación UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 18,
+      "source_marker_id": 552,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Estación Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378,
+      "source_map_id": 18,
+      "source_marker_id": 553,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Estación El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399,
+      "source_map_id": 18,
+      "source_marker_id": 554,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "Estación Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 18,
+      "source_marker_id": 555,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "Estación Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147,
+      "source_map_id": 18,
+      "source_marker_id": 556,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 11,
+      "stop_name": "Estación Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 18,
+      "source_marker_id": 557,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 12,
+      "stop_name": "Estación Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 18,
+      "source_marker_id": 558,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 13,
+      "stop_name": "Estación Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 18,
+      "source_marker_id": 559,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 14,
+      "stop_name": "Estación Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 18,
+      "source_marker_id": 570,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 15,
+      "stop_name": "Estación Universidad",
+      "lat": -11.9627856,
+      "lng": -77.0623263,
+      "source_map_id": 18,
+      "source_marker_id": 573,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 16,
+      "stop_name": "Estación 22 de Agosto",
+      "lat": -11.9466452,
+      "lng": -77.0605922,
+      "source_map_id": 18,
+      "source_marker_id": 538,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 17,
+      "stop_name": "Estación Andrés Belaunde",
+      "lat": -11.935051,
+      "lng": -77.05640389999999,
+      "source_map_id": 18,
+      "source_marker_id": 537,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 18,
+      "stop_name": "Estación Los Incas",
+      "lat": -11.9154528,
+      "lng": -77.0480489,
+      "source_map_id": 18,
+      "source_marker_id": 532,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea B",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 19,
+      "stop_name": "Chimpu Ocllo",
+      "lat": -11.8963694,
+      "lng": -77.03738940000001,
+      "source_map_id": 18,
+      "source_marker_id": 1139,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Ramon Castilla",
+      "lat": -12.0441185,
+      "lng": -77.0408633,
+      "source_map_id": 20,
+      "source_marker_id": 635,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Tacna",
+      "lat": -12.0465644,
+      "lng": -77.037143,
+      "source_map_id": 20,
+      "source_marker_id": 634,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 20,
+      "source_marker_id": 631,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 20,
+      "source_marker_id": 632,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Colmena",
+      "lat": -12.0523963,
+      "lng": -77.0329065,
+      "source_map_id": 20,
+      "source_marker_id": 633,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 20,
+      "source_marker_id": 658,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999,
+      "source_map_id": 20,
+      "source_marker_id": 650,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "México",
+      "lat": -12.0766412,
+      "lng": -77.02897709999999,
+      "source_map_id": 20,
+      "source_marker_id": 651,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 20,
+      "source_marker_id": 652,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 20,
+      "source_marker_id": 621,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 11,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 20,
+      "source_marker_id": 620,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 12,
+      "stop_name": "Aramburú",
+      "lat": -12.1034624,
+      "lng": -77.0273862,
+      "source_map_id": 20,
+      "source_marker_id": 630,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 13,
+      "stop_name": "Domingo Orué",
+      "lat": -12.1085005,
+      "lng": -77.0264381,
+      "source_map_id": 20,
+      "source_marker_id": 654,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 14,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 20,
+      "source_marker_id": 617,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 15,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 20,
+      "source_marker_id": 629,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 16,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 20,
+      "source_marker_id": 628,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 17,
+      "stop_name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 20,
+      "source_marker_id": 627,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 18,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 20,
+      "source_marker_id": 655,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 19,
+      "stop_name": "Balta",
+      "lat": -12.1370961,
+      "lng": -77.0177714,
+      "source_map_id": 20,
+      "source_marker_id": 626,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 20,
+      "stop_name": "Bulevar",
+      "lat": -12.1446776,
+      "lng": -77.0220144,
+      "source_map_id": 20,
+      "source_marker_id": 625,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 21,
+      "stop_name": "Estadio Unión",
+      "lat": -12.1527698,
+      "lng": -77.0197264,
+      "source_map_id": 20,
+      "source_marker_id": 619,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 22,
+      "stop_name": "Escuela Militar",
+      "lat": -12.1594717,
+      "lng": -77.0189075,
+      "source_map_id": 20,
+      "source_marker_id": 646,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 23,
+      "stop_name": "Terán",
+      "lat": -12.1683527,
+      "lng": -77.0187696,
+      "source_map_id": 20,
+      "source_marker_id": 647,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 24,
+      "stop_name": "Rosario de Villa",
+      "lat": -12.1727178,
+      "lng": -77.01541089999999,
+      "source_map_id": 20,
+      "source_marker_id": 653,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 25,
+      "stop_name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353,
+      "source_map_id": 20,
+      "source_marker_id": 657,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Matellini",
+      "lat": -12.1789558,
+      "lng": -77.0099353,
+      "source_map_id": 20,
+      "source_marker_id": 657,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Rosario de Villa",
+      "lat": -12.1727178,
+      "lng": -77.01541089999999,
+      "source_map_id": 20,
+      "source_marker_id": 653,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Terán",
+      "lat": -12.1683527,
+      "lng": -77.0187696,
+      "source_map_id": 20,
+      "source_marker_id": 647,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Escuela Militar",
+      "lat": -12.1594717,
+      "lng": -77.0189075,
+      "source_map_id": 20,
+      "source_marker_id": 646,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Estadio Unión",
+      "lat": -12.1527698,
+      "lng": -77.0197264,
+      "source_map_id": 20,
+      "source_marker_id": 619,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Bulevar",
+      "lat": -12.1446776,
+      "lng": -77.0220144,
+      "source_map_id": 20,
+      "source_marker_id": 625,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Balta",
+      "lat": -12.1370961,
+      "lng": -77.0177714,
+      "source_map_id": 20,
+      "source_marker_id": 626,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "Plaza de Flores",
+      "lat": -12.1364139,
+      "lng": -77.01867779999999,
+      "source_map_id": 20,
+      "source_marker_id": 655,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 20,
+      "source_marker_id": 627,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 20,
+      "source_marker_id": 628,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 11,
+      "stop_name": "Ricardo Palma",
+      "lat": -12.1189738,
+      "lng": -77.0259368,
+      "source_map_id": 20,
+      "source_marker_id": 629,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 12,
+      "stop_name": "Estación Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 20,
+      "source_marker_id": 617,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 13,
+      "stop_name": "Domingo Orué",
+      "lat": -12.1085005,
+      "lng": -77.0264381,
+      "source_map_id": 20,
+      "source_marker_id": 654,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 14,
+      "stop_name": "Aramburú",
+      "lat": -12.1034624,
+      "lng": -77.0273862,
+      "source_map_id": 20,
+      "source_marker_id": 630,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 15,
+      "stop_name": "Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 20,
+      "source_marker_id": 620,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 16,
+      "stop_name": "Javier Prado",
+      "lat": -12.090572,
+      "lng": -77.0227419,
+      "source_map_id": 20,
+      "source_marker_id": 621,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 17,
+      "stop_name": "Canadá",
+      "lat": -12.0822883,
+      "lng": -77.02660759999999,
+      "source_map_id": 20,
+      "source_marker_id": 652,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 18,
+      "stop_name": "México",
+      "lat": -12.0766412,
+      "lng": -77.02897709999999,
+      "source_map_id": 20,
+      "source_marker_id": 651,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 19,
+      "stop_name": "Estadio Nacional",
+      "lat": -12.0692365,
+      "lng": -77.03184999999999,
+      "source_map_id": 20,
+      "source_marker_id": 650,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 20,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 20,
+      "source_marker_id": 658,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 21,
+      "stop_name": "Colmena",
+      "lat": -12.0523963,
+      "lng": -77.0329065,
+      "source_map_id": 20,
+      "source_marker_id": 633,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 22,
+      "stop_name": "Jirón de la Unión (Norte)",
+      "lat": -12.0494306,
+      "lng": -77.0325889,
+      "source_map_id": 20,
+      "source_marker_id": 632,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 23,
+      "stop_name": "Jirón de la Unión (Sur)",
+      "lat": -12.0483957,
+      "lng": -77.03424770000001,
+      "source_map_id": 20,
+      "source_marker_id": 631,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 24,
+      "stop_name": "Tacna",
+      "lat": -12.0465644,
+      "lng": -77.037143,
+      "source_map_id": 20,
+      "source_marker_id": 634,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea C",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 25,
+      "stop_name": "Ramon Castilla",
+      "lat": -12.0441185,
+      "lng": -77.0408633,
+      "source_map_id": 20,
+      "source_marker_id": 635,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 28,
+      "source_marker_id": 991,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 28,
+      "source_marker_id": 983,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 28,
+      "source_marker_id": 982,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 28,
+      "source_marker_id": 981,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147,
+      "source_map_id": 28,
+      "source_marker_id": 980,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 28,
+      "source_marker_id": 979,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 7,
+      "stop_name": "El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399,
+      "source_map_id": 28,
+      "source_marker_id": 978,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 8,
+      "stop_name": "Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378,
+      "source_map_id": 28,
+      "source_marker_id": 977,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 9,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 28,
+      "source_marker_id": 976,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 10,
+      "stop_name": "Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424,
+      "source_map_id": 28,
+      "source_marker_id": 975,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 11,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 28,
+      "source_marker_id": 974,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 12,
+      "stop_name": "Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932,
+      "source_map_id": 28,
+      "source_marker_id": 984,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 13,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 28,
+      "source_marker_id": 992,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 14,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 28,
+      "source_marker_id": 985,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 28,
+      "source_marker_id": 985,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 28,
+      "source_marker_id": 992,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932,
+      "source_map_id": 28,
+      "source_marker_id": 984,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Caquetá",
+      "lat": -12.036372,
+      "lng": -77.0436608,
+      "source_map_id": 28,
+      "source_marker_id": 974,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Parque del Trabajo",
+      "lat": -12.0295748,
+      "lng": -77.04424,
+      "source_map_id": 28,
+      "source_marker_id": 975,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "UNI",
+      "lat": -12.0238022,
+      "lng": -77.04840589999999,
+      "source_map_id": 28,
+      "source_marker_id": 976,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 7,
+      "stop_name": "Honorio Delgado",
+      "lat": -12.0178703,
+      "lng": -77.0514378,
+      "source_map_id": 28,
+      "source_marker_id": 977,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 8,
+      "stop_name": "El Milagro",
+      "lat": -12.0112372,
+      "lng": -77.0529399,
+      "source_map_id": 28,
+      "source_marker_id": 978,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 9,
+      "stop_name": "Tomás Valle",
+      "lat": -12.006148,
+      "lng": -77.05405019999999,
+      "source_map_id": 28,
+      "source_marker_id": 979,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 10,
+      "stop_name": "Los Jazmines",
+      "lat": -12.0018652,
+      "lng": -77.0548147,
+      "source_map_id": 28,
+      "source_marker_id": 980,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 11,
+      "stop_name": "Independencia",
+      "lat": -11.9983357,
+      "lng": -77.0552743,
+      "source_map_id": 28,
+      "source_marker_id": 981,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 12,
+      "stop_name": "Pacífico",
+      "lat": -11.9944474,
+      "lng": -77.0562303,
+      "source_map_id": 28,
+      "source_marker_id": 982,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 13,
+      "stop_name": "Izaguirre",
+      "lat": -11.9896428,
+      "lng": -77.0570219,
+      "source_map_id": 28,
+      "source_marker_id": 983,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Línea D",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 14,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 28,
+      "source_marker_id": 991,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Súper Expreso Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 29,
+      "source_marker_id": 1033,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "Súper Expreso Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 29,
+      "source_marker_id": 997,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Súper Expreso Aramburú",
+      "lat": -12.1034624,
+      "lng": -77.0273862,
+      "source_map_id": 29,
+      "source_marker_id": 1007,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Súper Expreso Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 29,
+      "source_marker_id": 994,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "Súper Expreso Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 29,
+      "source_marker_id": 1005,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 6,
+      "stop_name": "Súper Expreso 28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 29,
+      "source_marker_id": 1004,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "Súper Expreso 28 de Julio",
+      "lat": -12.1294423,
+      "lng": -77.0228339,
+      "source_map_id": 29,
+      "source_marker_id": 1004,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Súper Expreso Benavides",
+      "lat": -12.1251351,
+      "lng": -77.0242088,
+      "source_map_id": 29,
+      "source_marker_id": 1005,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Súper Expreso Angamos",
+      "lat": -12.1132904,
+      "lng": -77.0259612,
+      "source_map_id": 29,
+      "source_marker_id": 994,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "Súper Expreso Aramburú",
+      "lat": -12.1034624,
+      "lng": -77.0273862,
+      "source_map_id": 29,
+      "source_marker_id": 1007,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Súper Expreso Canaval Moreyra",
+      "lat": -12.0969508,
+      "lng": -77.02511659999999,
+      "source_map_id": 29,
+      "source_marker_id": 997,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 6,
+      "stop_name": "Súper Expreso Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 29,
+      "source_marker_id": 1033,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 1,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 30,
+      "source_marker_id": 1076,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 2,
+      "stop_name": "2 de Mayo",
+      "lat": -12.047436,
+      "lng": -77.04266799999999,
+      "source_map_id": 30,
+      "source_marker_id": 1042,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 3,
+      "stop_name": "Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932,
+      "source_map_id": 30,
+      "source_marker_id": 1068,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 4,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 30,
+      "source_marker_id": 1078,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "NORTE_SUR",
+      "stop_order": 5,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 30,
+      "source_marker_id": 1069,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 1,
+      "stop_name": "España",
+      "lat": -12.0577742,
+      "lng": -77.0417326,
+      "source_map_id": 30,
+      "source_marker_id": 1069,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 2,
+      "stop_name": "Estación Central",
+      "lat": -12.0576958,
+      "lng": -77.0359527,
+      "source_map_id": 30,
+      "source_marker_id": 1078,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 3,
+      "stop_name": "Quilca",
+      "lat": -12.0519356,
+      "lng": -77.0422932,
+      "source_map_id": 30,
+      "source_marker_id": 1068,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 4,
+      "stop_name": "2 de Mayo",
+      "lat": -12.047436,
+      "lng": -77.04266799999999,
+      "source_map_id": 30,
+      "source_marker_id": 1042,
+      "order_method": "latitude_desc_inferred"
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "direction_code": "SUR_NORTE",
+      "stop_order": 5,
+      "stop_name": "Naranjal",
+      "lat": -11.9814134,
+      "lng": -77.05899099999999,
+      "source_map_id": 30,
+      "source_marker_id": 1076,
+      "order_method": "latitude_desc_inferred"
+    }
+  ],
+  "missing_routes": [],
+  "stats": {
+    "routes_with_stops": 19,
+    "unique_stops": 70,
+    "route_stops_rows": 336,
+    "missing_routes_count": 0
+  }
+}

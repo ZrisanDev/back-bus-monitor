@@ -5,6 +5,8 @@ import { RouteStopsService } from '../route-stops.service';
 import { RouteStop } from '../entities/route-stop.entity';
 import { CreateRouteStopDto } from '../dto/create-route-stop.dto';
 import { UpdateRouteStopDto } from '../dto/update-route-stop.dto';
+import { Route } from '../../routes/entities/route.entity';
+import { Stop } from '../../stops/entities/stop.entity';
 
 describe('RouteStopsService', () => {
   let service: RouteStopsService;
@@ -50,10 +52,12 @@ describe('RouteStopsService', () => {
     id: 1,
     route_id: 10,
     stop_id: 20,
-    direction_id: 2,
     stop_order: 1,
+    segment_geometry: null,
     created_at: new Date('2025-01-01T00:00:00.000Z'),
     updated_at: new Date('2025-01-01T00:00:00.000Z'),
+    route: {} as Route,
+    stop: {} as Stop,
     ...overrides,
   });
 
@@ -138,7 +142,6 @@ describe('RouteStopsService', () => {
     const dto: CreateRouteStopDto = {
       route_id: 10,
       stop_id: 20,
-      direction_id: 2,
       stop_order: 1,
     };
 
@@ -161,13 +164,11 @@ describe('RouteStopsService', () => {
       const otherDto: CreateRouteStopDto = {
         route_id: 5,
         stop_id: 15,
-        direction_id: 1,
         stop_order: 3,
       };
       const rs = makeRouteStop({
         route_id: 5,
         stop_id: 15,
-        direction_id: 1,
         stop_order: 3,
       });
       mockRepository.findOneBy.mockResolvedValue(null);
@@ -182,7 +183,7 @@ describe('RouteStopsService', () => {
       expect(result.stop_order).toBe(3);
     });
 
-    it('should throw ConflictException when (route_id, stop_id, direction_id) already exists', async () => {
+    it('should throw ConflictException when (route_id, stop_id) already exists', async () => {
       const existing = makeRouteStop();
       mockRepository.findOneBy.mockResolvedValue(existing);
 
@@ -202,13 +203,10 @@ describe('RouteStopsService', () => {
       }
     });
 
-    it('should throw ConflictException when (route_id, direction_id, stop_order) already exists', async () => {
-      // First findOneBy returns null (no route+stop+direction duplicate)
-      // Second findOneBy returns existing (route+direction+order duplicate)
-      const existingOrder = makeRouteStop({ stop_id: 99 });
+    it('should throw ConflictException when (route_id, stop_order) already exists', async () => {
       mockRepository.findOneBy
-        .mockResolvedValueOnce(null) // no (route, stop, direction) duplicate
-        .mockResolvedValueOnce(existingOrder); // (route, direction, order) duplicate
+        .mockResolvedValueOnce(null) // no (route, stop) duplicate
+        .mockResolvedValueOnce(makeRouteStop({ stop_id: 99 })); // (route, order) duplicate
 
       await expect(service.create(dto)).rejects.toThrow(ConflictException);
     });

@@ -56,6 +56,9 @@ describe('ReportsTelemetryConsumer', () => {
       longitude: -77.03,
       passenger_count: 25,
       timestamp: new Date().toISOString(),
+      status: 'En camino a Parada Central',
+      current_stop: 'Parada Sur',
+      next_stop: 'Parada Central',
     };
 
     // ── SCN: Valid telemetry persists via ReportsService ────────────────
@@ -123,6 +126,9 @@ describe('ReportsTelemetryConsumer', () => {
         longitude: -77.1,
         passenger_count: 10,
         timestamp: new Date().toISOString(),
+        status: 'En Parada Norte',
+        current_stop: 'Parada Norte',
+        next_stop: null,
       };
       const savedReport = {
         id: 2,
@@ -170,6 +176,9 @@ describe('ReportsTelemetryConsumer', () => {
       longitude: -77.03,
       passenger_count: 25,
       timestamp: '2025-06-15T12:00:00.000Z',
+      status: 'En camino a Parada Central',
+      current_stop: 'Parada Sur',
+      next_stop: 'Parada Central',
     };
 
     // ── SCN: Emits bus:updated after successful persistence ──────────────
@@ -266,6 +275,113 @@ describe('ReportsTelemetryConsumer', () => {
       const emitted = mockBusGateway.emitBusUpdated.mock.calls[0][0];
       expect(emitted.occupancy_percentage).toBe(50);
       expect(emitted.bus_id).toBe(5);
+    });
+  });
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // handleTelemetry — enriched telemetry (status, current_stop, next_stop)
+  // ═══════════════════════════════════════════════════════════════════════
+
+  describe('handleTelemetry (enriched telemetry)', () => {
+    const enrichedPayload = {
+      bus_id: 1,
+      route_id: 10,
+      stop_id: 100,
+      latitude: -12.04,
+      longitude: -77.03,
+      passenger_count: 25,
+      timestamp: '2025-06-15T12:00:00.000Z',
+      status: 'En camino a Plaza Mayor',
+      current_stop: 'Parada Central',
+      next_stop: 'Plaza Mayor',
+    };
+
+    // ── SCN: Passes status, current_stop, next_stop to createFromTelemetry ──
+
+    it('should forward status, current_stop, next_stop to createFromTelemetry', async () => {
+      const savedReport = {
+        id: 1,
+        bus_id: 1,
+        passenger_count: 25,
+        bus: makeBus(40),
+      };
+      mockReportsService.createFromTelemetry.mockResolvedValue(savedReport);
+
+      await consumer.handleTelemetry(enrichedPayload);
+
+      expect(mockReportsService.createFromTelemetry).toHaveBeenCalledWith(
+        enrichedPayload.bus_id,
+        expect.objectContaining({
+          passenger_count: 25,
+          route_id: 10,
+          stop_id: 100,
+          latitude: -12.04,
+          longitude: -77.03,
+          status: 'En camino a Plaza Mayor',
+          current_stop: 'Parada Central',
+          next_stop: 'Plaza Mayor',
+        }),
+      );
+    });
+
+    // ── SCN: Emits bus:updated with status, current_stop, next_stop ──────
+
+    it('should emit bus:updated with status, current_stop, next_stop', async () => {
+      const savedReport = {
+        id: 1,
+        bus_id: 1,
+        passenger_count: 25,
+        bus: makeBus(40),
+      };
+      mockReportsService.createFromTelemetry.mockResolvedValue(savedReport);
+
+      await consumer.handleTelemetry(enrichedPayload);
+
+      expect(mockBusGateway.emitBusUpdated).toHaveBeenCalledWith(
+        expect.objectContaining({
+          bus_id: 1,
+          status: 'En camino a Plaza Mayor',
+          current_stop: 'Parada Central',
+          next_stop: 'Plaza Mayor',
+        }),
+      );
+    });
+
+    // ── SCN: Triangulation — STOPPED status with null next_stop ──────────
+
+    it('should forward STOPPED status and null next_stop to service and gateway', async () => {
+      const stoppedPayload = {
+        ...enrichedPayload,
+        status: 'En Parada Norte',
+        current_stop: 'Parada Norte',
+        next_stop: null,
+      };
+      const savedReport = {
+        id: 2,
+        bus_id: 1,
+        passenger_count: 25,
+        bus: makeBus(40),
+      };
+      mockReportsService.createFromTelemetry.mockResolvedValue(savedReport);
+
+      await consumer.handleTelemetry(stoppedPayload);
+
+      expect(mockReportsService.createFromTelemetry).toHaveBeenCalledWith(
+        1,
+        expect.objectContaining({
+          status: 'En Parada Norte',
+          current_stop: 'Parada Norte',
+          next_stop: null,
+        }),
+      );
+
+      expect(mockBusGateway.emitBusUpdated).toHaveBeenCalledWith(
+        expect.objectContaining({
+          status: 'En Parada Norte',
+          current_stop: 'Parada Norte',
+          next_stop: null,
+        }),
+      );
     });
   });
 });

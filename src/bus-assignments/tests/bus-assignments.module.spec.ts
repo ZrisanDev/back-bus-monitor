@@ -1,4 +1,4 @@
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { BusAssignmentsModule } from '../bus-assignments.module';
 import { BusAssignmentsService } from '../bus-assignments.service';
@@ -6,7 +6,7 @@ import { BusAssignmentsController, BusActiveAssignmentController } from '../bus-
 import { BusAssignment } from '../entities/bus-assignment.entity';
 
 describe('BusAssignmentsModule', () => {
-  let module: any;
+  let module: TestingModule;
 
   beforeEach(async () => {
     module = await Test.createTestingModule({

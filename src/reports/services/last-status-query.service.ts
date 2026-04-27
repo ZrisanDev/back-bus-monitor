@@ -29,10 +29,16 @@ export class LastStatusQueryService {
         COALESCE(r.route_id, ba.route_id) AS route_id,
         rt.name AS route_name,
         r.stop_id AS stop_id,
-        s.name AS stop_name
+        s.name AS stop_name,
+        r.latitude,
+        r.longitude,
+        r.status,
+        r.current_stop,
+        r.next_stop
       FROM buses b
       LEFT JOIN LATERAL (
-        SELECT passenger_count, timestamp, route_id, stop_id
+        SELECT passenger_count, timestamp, route_id, stop_id,
+               latitude, longitude, status, current_stop, next_stop
         FROM reports
         WHERE bus_id = b.id
         ORDER BY timestamp DESC
@@ -57,6 +63,11 @@ export class LastStatusQueryService {
       stop_id:
         row.stop_id !== null ? Number(row.stop_id) : null,
       stop_name: row.stop_name,
+      latitude: row.latitude !== null ? Number(row.latitude) : null,
+      longitude: row.longitude !== null ? Number(row.longitude) : null,
+      status: row.status,
+      current_stop: row.current_stop,
+      next_stop: row.next_stop,
       occupancy_percentage:
         row.passenger_count !== null
           ? Math.round(

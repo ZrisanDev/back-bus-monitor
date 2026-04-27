@@ -10,4 +10,5 @@ export interface IRoutesService {
   remove(id: number): Promise<Route>;
   findStopsByRoute(routeId: number): Promise<any[]>;
   findGeoJsonByRoute(routeId: number): Promise<any>;
+  findSegmentByOrder(routeId: number, order: number): Promise<any>;
 }

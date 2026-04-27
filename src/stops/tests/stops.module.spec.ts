@@ -1,4 +1,4 @@
-import { Test } from '@nestjs/testing';
+import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { StopsModule } from '../stops.module';
 import { StopsService } from '../stops.service';
@@ -6,7 +6,7 @@ import { StopsController } from '../stops.controller';
 import { Stop } from '../entities/stop.entity';
 
 describe('StopsModule', () => {
-  let module: any;
+  let module: TestingModule;
 
   beforeEach(async () => {
     module = await Test.createTestingModule({

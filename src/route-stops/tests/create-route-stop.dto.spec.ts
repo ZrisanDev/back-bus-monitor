@@ -95,39 +95,12 @@ describe('CreateRouteStopDto', () => {
     expect(prop!.constraints).toHaveProperty('min');
   });
 
-  // ── direction_id validation ───────────────────────────────────────────────
-
-  it('should fail when direction_id is missing', async () => {
-    const errors = await validateDto({
-      route_id: 1,
-      stop_id: 2,
-      stop_order: 1,
-    });
-    expect(errors.length).toBeGreaterThan(0);
-    const prop = errors.find((e) => e.property === 'direction_id');
-    expect(prop).toBeDefined();
-  });
-
-  it('should fail when direction_id is less than 1', async () => {
-    const errors = await validateDto({
-      route_id: 1,
-      stop_id: 2,
-      direction_id: -1,
-      stop_order: 1,
-    });
-    expect(errors.length).toBeGreaterThan(0);
-    const prop = errors.find((e) => e.property === 'direction_id');
-    expect(prop).toBeDefined();
-    expect(prop!.constraints).toHaveProperty('min');
-  });
-
   // ── stop_order validation ─────────────────────────────────────────────────
 
   it('should fail when stop_order is missing', async () => {
     const errors = await validateDto({
       route_id: 1,
       stop_id: 2,
-      direction_id: 3,
     });
     expect(errors.length).toBeGreaterThan(0);
     const prop = errors.find((e) => e.property === 'stop_order');
@@ -138,7 +111,6 @@ describe('CreateRouteStopDto', () => {
     const errors = await validateDto({
       route_id: 1,
       stop_id: 2,
-      direction_id: 3,
       stop_order: 0,
     });
     expect(errors.length).toBeGreaterThan(0);
@@ -151,7 +123,6 @@ describe('CreateRouteStopDto', () => {
     const errors = await validateDto({
       route_id: 1,
       stop_id: 2,
-      direction_id: 3,
       stop_order: -5,
     });
     expect(errors.length).toBeGreaterThan(0);
@@ -164,7 +135,6 @@ describe('CreateRouteStopDto', () => {
     const errors = await validateDto({
       route_id: 1,
       stop_id: 2,
-      direction_id: 3,
       stop_order: 1.5,
     });
     expect(errors.length).toBeGreaterThan(0);

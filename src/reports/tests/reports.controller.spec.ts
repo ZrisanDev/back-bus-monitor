@@ -24,6 +24,11 @@ describe('ReportsController', () => {
     id: 1,
     bus_id: 1,
     passenger_count: 22,
+    latitude: -12.04,
+    longitude: -77.03,
+    status: null,
+    current_stop: null,
+    next_stop: null,
     timestamp: new Date('2025-06-15T12:00:00.000Z'),
     created_at: new Date('2025-06-15T12:00:00.000Z'),
     route_id: null,
@@ -65,6 +70,8 @@ describe('ReportsController', () => {
     it('should call service.create with parsed id and dto', async () => {
       const dto: CreateReportDto = {
         passenger_count: 22,
+        latitude: -12.04,
+        longitude: -77.03,
       };
       const report = makeReport({ bus_id: 10 });
       jest.spyOn(service, 'create').mockResolvedValue(report);
@@ -80,6 +87,8 @@ describe('ReportsController', () => {
     it('should parse different string ids to numbers', async () => {
       const dto: CreateReportDto = {
         passenger_count: 0,
+        latitude: -12.05,
+        longitude: -77.04,
       };
       const report = makeReport({
         bus_id: 42,

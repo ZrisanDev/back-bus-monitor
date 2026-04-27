@@ -5,7 +5,7 @@ import { SKIP_TRANSFORM_KEY } from '../decorators/skip-transform.decorator';
 import { TransformInterceptor } from '../interceptors/transform.interceptor';
 
 describe('TransformInterceptor', () => {
-  let interceptor: TransformInterceptor;
+  let interceptor: TransformInterceptor<any>;
   let reflector: Reflector;
   let mockContext: any;
   let mockResponse: any;
@@ -20,7 +20,7 @@ describe('TransformInterceptor', () => {
         getResponse: () => mockResponse,
       }),
       getHandler: jest.fn().mockReturnValue(() => {}),
-    } as ExecutionContext;
+    } as unknown as ExecutionContext;
   });
 
   const createCallHandler = (data: any): CallHandler => ({

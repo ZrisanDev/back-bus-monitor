@@ -3,6 +3,8 @@ import { RouteStopsController } from '../route-stops.controller';
 import { CreateRouteStopDto } from '../dto/create-route-stop.dto';
 import { UpdateRouteStopDto } from '../dto/update-route-stop.dto';
 import { RouteStop } from '../entities/route-stop.entity';
+import { Route } from '../../routes/entities/route.entity';
+import { Stop } from '../../stops/entities/stop.entity';
 
 describe('RouteStopsController', () => {
   let controller: RouteStopsController;
@@ -12,10 +14,12 @@ describe('RouteStopsController', () => {
     id: 1,
     route_id: 10,
     stop_id: 20,
-    direction_id: 2,
     stop_order: 1,
+    segment_geometry: null,
     created_at: new Date('2025-01-01T00:00:00.000Z'),
     updated_at: new Date('2025-01-01T00:00:00.000Z'),
+    route: {} as Route,
+    stop: {} as Stop,
     ...overrides,
   });
 
@@ -49,7 +53,6 @@ describe('RouteStopsController', () => {
       const dto: CreateRouteStopDto = {
         route_id: 10,
         stop_id: 20,
-        direction_id: 2,
         stop_order: 1,
       };
       const rs = makeRouteStop();
@@ -65,10 +68,9 @@ describe('RouteStopsController', () => {
       const dto: CreateRouteStopDto = {
         route_id: 5,
         stop_id: 15,
-        direction_id: 1,
         stop_order: 3,
       };
-      const rs = makeRouteStop({ route_id: 5, stop_id: 15, direction_id: 1, stop_order: 3 });
+      const rs = makeRouteStop({ route_id: 5, stop_id: 15, stop_order: 3 });
       jest.spyOn(service, 'create').mockResolvedValue(rs);
 
       const result = await controller.create(dto);

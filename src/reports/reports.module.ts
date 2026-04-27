@@ -4,14 +4,20 @@ import { Report } from './entities/report.entity';
 import { ReportsService } from './reports.service';
 import { ReportsController } from './reports.controller';
 import { BusesModule } from '../buses/buses.module';
+import { BusAssignmentsModule } from '../bus-assignments/bus-assignments.module';
 import { LastStatusQueryService } from './services/last-status-query.service';
 import { BackfillPreviewService } from './services/backfill-preview.service';
 import { BackfillExecuteService } from './services/backfill-execute.service';
 import { ReportsTelemetryConsumer } from './reports.telemetry.consumer';
 import { BusGateway } from '../websocket/bus.gateway';
+import { RouteStop } from '../route-stops/entities/route-stop.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Report]), forwardRef(() => BusesModule)],
+  imports: [
+    TypeOrmModule.forFeature([Report, RouteStop]),
+    forwardRef(() => BusesModule),
+    BusAssignmentsModule,
+  ],
   controllers: [ReportsController, ReportsTelemetryConsumer],
   providers: [
     ReportsService,

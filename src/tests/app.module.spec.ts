@@ -3,13 +3,9 @@ import { DatabaseModule } from '../database/database.module';
 import { HealthModule } from '../health/health.module';
 import { BusesModule } from '../buses/buses.module';
 import { ReportsModule } from '../reports/reports.module';
-import { DirectionsModule } from '../directions/directions.module';
 import { RoutesModule } from '../routes/routes.module';
 import { StopsModule } from '../stops/stops.module';
-import { DayTypesModule } from '../day-types/day-types.module';
 import { RouteStopsModule } from '../route-stops/route-stops.module';
-import { HolidaysModule } from '../holidays/holidays.module';
-import { SchedulesModule } from '../schedules/schedules.module';
 import { BusAssignmentsModule } from '../bus-assignments/bus-assignments.module';
 import { SimulatorModule } from '../simulator/simulator.module';
 
@@ -23,13 +19,9 @@ describe('AppModule', () => {
     const requiredModules = [
       BusesModule,
       ReportsModule,
-      DirectionsModule,
       RoutesModule,
       StopsModule,
-      DayTypesModule,
       RouteStopsModule,
-      HolidaysModule,
-      SchedulesModule,
       BusAssignmentsModule,
       SimulatorModule,
     ];
@@ -77,14 +69,13 @@ describe('AppModule', () => {
 
   // ── SCN: Total module count matches expected ─────────────────────────
 
-  it('should have exactly 14 module imports (2 dynamic + 12 class)', () => {
+  it('should have exactly 10 module imports (2 dynamic + 8 class)', () => {
     const imports = Reflect.getMetadata('imports', AppModule) as any[];
 
-    // 2 dynamic (ConfigModule.forRoot, DatabaseModule.forRoot) + 12 class = 14 total
+    // 2 dynamic (ConfigModule.forRoot, DatabaseModule.forRoot) + 8 class = 10 total
     // ConfigModule.forRoot({isGlobal:true}), DatabaseModule.forRoot(), HealthModule,
-    // BusesModule, ReportsModule, DirectionsModule, RoutesModule, StopsModule,
-    // DayTypesModule, RouteStopsModule, HolidaysModule, SchedulesModule,
-    // BusAssignmentsModule, SimulatorModule
-    expect(imports).toHaveLength(14);
+    // BusesModule, ReportsModule, RoutesModule, StopsModule,
+    // RouteStopsModule, BusAssignmentsModule, SimulatorModule
+    expect(imports).toHaveLength(10);
   });
 });

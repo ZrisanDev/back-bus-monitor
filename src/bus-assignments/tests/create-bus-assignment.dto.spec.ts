@@ -14,6 +14,7 @@ describe('CreateBusAssignmentDto', () => {
     const errors = await validateDto({
       bus_id: 1,
       route_id: 5,
+      direction_id: 1,
     });
     expect(errors).toHaveLength(0);
   });
@@ -22,6 +23,7 @@ describe('CreateBusAssignmentDto', () => {
     const errors = await validateDto({
       bus_id: 42,
       route_id: 99,
+      direction_id: 2,
     });
     expect(errors).toHaveLength(0);
   });

@@ -1,0 +1,946 @@
+{
+  "generated_at_utc": "2026-04-25T23:56:06.572440+00:00",
+  "source": {
+    "url": "https://metrolima.info/metropolitano/horario/",
+    "extracted_section": "Horarios de Expresos Metropolitano -> Horarios de servicios Regulares"
+  },
+  "database_mapping": {
+    "day_types": [
+      {
+        "code": "LUNES_VIERNES",
+        "expected_id": 1
+      },
+      {
+        "code": "SABADO",
+        "expected_id": 2
+      },
+      {
+        "code": "DOMINGO",
+        "expected_id": 3
+      },
+      {
+        "code": "FERIADO",
+        "expected_id": 4
+      }
+    ],
+    "directions": [
+      {
+        "code": "NORTE_SUR",
+        "expected_id": 1
+      },
+      {
+        "code": "SUR_NORTE",
+        "expected_id": 2
+      }
+    ]
+  },
+  "routes_seed": [
+    {
+      "seed_order": 1,
+      "name": "Expreso 1"
+    },
+    {
+      "seed_order": 2,
+      "name": "Expreso 10"
+    },
+    {
+      "seed_order": 3,
+      "name": "Expreso 11"
+    },
+    {
+      "seed_order": 4,
+      "name": "Expreso 12"
+    },
+    {
+      "seed_order": 5,
+      "name": "Expreso 13"
+    },
+    {
+      "seed_order": 6,
+      "name": "Expreso 2"
+    },
+    {
+      "seed_order": 7,
+      "name": "Expreso 3"
+    },
+    {
+      "seed_order": 8,
+      "name": "Expreso 5"
+    },
+    {
+      "seed_order": 9,
+      "name": "Expreso 6"
+    },
+    {
+      "seed_order": 10,
+      "name": "Expreso 7"
+    },
+    {
+      "seed_order": 11,
+      "name": "Expreso 8"
+    },
+    {
+      "seed_order": 12,
+      "name": "Expreso 9"
+    },
+    {
+      "seed_order": 13,
+      "name": "Lechucero"
+    },
+    {
+      "seed_order": 14,
+      "name": "Línea A"
+    },
+    {
+      "seed_order": 15,
+      "name": "Línea B"
+    },
+    {
+      "seed_order": 16,
+      "name": "Línea C"
+    },
+    {
+      "seed_order": 17,
+      "name": "Línea D"
+    },
+    {
+      "seed_order": 18,
+      "name": "Súper Expreso"
+    },
+    {
+      "seed_order": 19,
+      "name": "Súper Expreso Norte"
+    }
+  ],
+  "schedules_seed": [
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "09:00",
+      "end_time": "17:00",
+      "is_operating": true,
+      "origin_stop": "Paradero Naranjal",
+      "destination_stop": "Paradero Plaza de Flores",
+      "source_day_label": "Expreso 5 de Lunes de viernes",
+      "source_time_text": "09:00 a. m. - 05:00 p. m.",
+      "notes": null,
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "09:00",
+      "end_time": "17:00",
+      "is_operating": true,
+      "origin_stop": "Paradero Plaza de Flores",
+      "destination_stop": "Paradero Naranjal",
+      "source_day_label": "Expreso 5 de Lunes de viernes",
+      "source_time_text": "09:00 a. m. - 05:00 p. m.",
+      "notes": null,
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:15",
+      "end_time": "20:20",
+      "is_operating": true,
+      "origin_stop": "Paradero Naranjal",
+      "destination_stop": "Paradero Plaza de Flores",
+      "source_day_label": "Expreso 5 sábado",
+      "source_time_text": "05:15 a. m. - 08:20 p. m.",
+      "notes": null,
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:15",
+      "end_time": "20:20",
+      "is_operating": true,
+      "origin_stop": "Paradero Plaza de Flores",
+      "destination_stop": "Paradero Naranjal",
+      "source_day_label": "Expreso 5 sábado",
+      "source_time_text": "05:15 a. m. - 08:20 p. m.",
+      "notes": null,
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "DOMINGO",
+      "direction_code": "NORTE_SUR",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": null,
+      "destination_stop": null,
+      "source_day_label": "Expreso 5 domingo",
+      "source_time_text": null,
+      "notes": "💡El Exp 5 no brinda servicio los días domingos y feriados.",
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "DOMINGO",
+      "direction_code": "SUR_NORTE",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": null,
+      "destination_stop": null,
+      "source_day_label": "Expreso 5 domingo",
+      "source_time_text": null,
+      "notes": "💡El Exp 5 no brinda servicio los días domingos y feriados.",
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "FERIADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": null,
+      "destination_stop": null,
+      "source_day_label": "Expreso 5 domingo",
+      "source_time_text": null,
+      "notes": "💡El Exp 5 no brinda servicio los días domingos y feriados.",
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 5",
+      "day_type_code": "FERIADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": null,
+      "destination_stop": null,
+      "source_day_label": "Expreso 5 domingo",
+      "source_time_text": null,
+      "notes": "💡El Exp 5 no brinda servicio los días domingos y feriados.",
+      "route_seed_order": 8
+    },
+    {
+      "route_name": "Expreso 1",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:30",
+      "end_time": "20:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Matellini",
+      "source_day_label": "Expreso 1 de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 08:00 p. m.",
+      "notes": null,
+      "route_seed_order": 1
+    },
+    {
+      "route_name": "Expreso 1",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 1 de Lunes de viernes",
+      "source_time_text": "05:00 a. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 1
+    },
+    {
+      "route_name": "Expreso 1",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "06:30",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 1 sábado",
+      "source_time_text": "06:30 a. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 1
+    },
+    {
+      "route_name": "Expreso 1",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "06:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 1 sábado",
+      "source_time_text": "06:00 a. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 1
+    },
+    {
+      "route_name": "Expreso 1",
+      "day_type_code": "DOMINGO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "06:30",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 1 domingo",
+      "source_time_text": "06:30 a. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 1
+    },
+    {
+      "route_name": "Expreso 1",
+      "day_type_code": "DOMINGO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "06:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 1 domingo",
+      "source_time_text": "06:00 a. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 1
+    },
+    {
+      "route_name": "Expreso 2",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación 28 de Julio",
+      "source_day_label": "Expreso 2 de Lunes de viernes",
+      "source_time_text": "05:00 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 6
+    },
+    {
+      "route_name": "Expreso 2",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "17:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Estación Ricardo Palma",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Expreso 2 de Lunes de viernes",
+      "source_time_text": "05:00 p. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 6
+    },
+    {
+      "route_name": "Expreso 2",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "06:00",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 2 sábado",
+      "source_time_text": "06:00 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 6
+    },
+    {
+      "route_name": "Expreso 2",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "12:30",
+      "end_time": "15:30",
+      "is_operating": true,
+      "origin_stop": "Estación Ricardo Palma",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Expreso 2 sábado",
+      "source_time_text": "12:30 p. m. - 03:30 p. m.",
+      "notes": null,
+      "route_seed_order": 6
+    },
+    {
+      "route_name": "Expreso 3",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "17:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Estación Benavides",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Expreso 3 de Lunes de viernes",
+      "source_time_text": "05:00 p. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 7
+    },
+    {
+      "route_name": "Expreso 3",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "12:30",
+      "end_time": "15:30",
+      "is_operating": true,
+      "origin_stop": "Estación Benavides",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Expreso 3 sábado",
+      "source_time_text": "12:30 p. m. - 03:30 p. m.",
+      "notes": null,
+      "route_seed_order": 7
+    },
+    {
+      "route_name": "Expreso 6",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:30",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Estación Izaguirre",
+      "destination_stop": "Estación Benavides",
+      "source_day_label": "Expreso 6 de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 9
+    },
+    {
+      "route_name": "Expreso 7",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:30",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Estación Tomás Valle",
+      "destination_stop": "Estación Angamos",
+      "source_day_label": "Expreso 7 de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 10
+    },
+    {
+      "route_name": "Expreso 8",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "17:00",
+      "end_time": "20:20",
+      "is_operating": true,
+      "origin_stop": "Estación Izaguirre",
+      "destination_stop": "Estación Plaza de Flores",
+      "source_day_label": "Expreso 8 de Lunes de viernes",
+      "source_time_text": "05:00 p. m. - 08:20 p. m.",
+      "notes": null,
+      "route_seed_order": 11
+    },
+    {
+      "route_name": "Expreso 8",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "17:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Estación Plaza de Flores",
+      "destination_stop": "Estación Izaguirre",
+      "source_day_label": "Expreso 8 de Lunes de viernes",
+      "source_time_text": "05:00 p. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 11
+    },
+    {
+      "route_name": "Expreso 9",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:30",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Estación Plaza de Flores",
+      "destination_stop": "Estación UNI",
+      "source_day_label": "Expreso 9 de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 12
+    },
+    {
+      "route_name": "Expreso 9",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:30",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Estación Plaza de Flores",
+      "destination_stop": "Estación UNI",
+      "source_day_label": "Expreso 9 de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 12
+    },
+    {
+      "route_name": "Expreso 10",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "06:00",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 10 de Lunes de viernes",
+      "source_time_text": "06:00 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 2
+    },
+    {
+      "route_name": "Expreso 11",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Estación Los Incas",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 11 de Lunes de viernes",
+      "source_time_text": "05:00 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 3
+    },
+    {
+      "route_name": "Expreso 11",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:45",
+      "end_time": "10:45",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Estación Los Incas",
+      "source_day_label": "Expreso 11 de Lunes de viernes",
+      "source_time_text": "05:45 a. m. - 10:45 a. m.",
+      "notes": null,
+      "route_seed_order": 3
+    },
+    {
+      "route_name": "Expreso 12",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:45",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Estación Benavides",
+      "source_day_label": "Expreso 12 de Lunes de viernes",
+      "source_time_text": "05:45 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 4
+    },
+    {
+      "route_name": "Expreso 13",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Chimpu Ocllo",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Expreso 13 de Lunes de viernes",
+      "source_time_text": "05:00 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 5
+    },
+    {
+      "route_name": "Expreso 13",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:50",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Chimpu Ocllo",
+      "source_day_label": "Expreso 13 de Lunes de viernes",
+      "source_time_text": "05:50 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 5
+    },
+    {
+      "route_name": "Súper Expreso",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:30",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación 28 de Julio",
+      "source_day_label": "SX de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 18
+    },
+    {
+      "route_name": "Súper Expreso",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "17:00",
+      "end_time": "21:00",
+      "is_operating": true,
+      "origin_stop": "Estación Aramburú",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "SX de Lunes de viernes",
+      "source_time_text": "05:00 p. m. - 09:00 p. m.",
+      "notes": null,
+      "route_seed_order": 18
+    },
+    {
+      "route_name": "Súper Expreso",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "06:00",
+      "end_time": "09:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación 28 de Julio",
+      "source_day_label": "SX sábado",
+      "source_time_text": "06:00 a. m. - 09:00 a. m.",
+      "notes": null,
+      "route_seed_order": 18
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "SXN de Lunes de viernes",
+      "source_time_text": "05:00 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 19
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": "06:00",
+      "end_time": "08:00",
+      "is_operating": true,
+      "origin_stop": "Estación 22 de Agosto",
+      "destination_stop": "Estación Central",
+      "source_day_label": "SXN de Lunes de viernes",
+      "source_time_text": "06:00 a. m. - 08:00 a. m.",
+      "notes": null,
+      "route_seed_order": 19
+    },
+    {
+      "route_name": "Súper Expreso Norte",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:30",
+      "end_time": "10:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "SXN de Lunes de viernes",
+      "source_time_text": "05:30 a. m. - 10:00 a. m.",
+      "notes": null,
+      "route_seed_order": 19
+    },
+    {
+      "route_name": "Lechucero",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "NORTE_SUR",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Terminal Matellini",
+      "source_day_label": "Lechucero viernes y sábado",
+      "source_time_text": "11:30 p.m - 4:00 a.m",
+      "notes": "Horario cruza medianoche; este schema no soporta start_time > end_time.",
+      "route_seed_order": 13
+    },
+    {
+      "route_name": "Lechucero",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Terminal Matellini",
+      "source_day_label": "Lechucero viernes y sábado",
+      "source_time_text": "11:30 p.m - 4:00 a.m",
+      "notes": "Horario cruza medianoche; este schema no soporta start_time > end_time.",
+      "route_seed_order": 13
+    },
+    {
+      "route_name": "Lechucero",
+      "day_type_code": "LUNES_VIERNES",
+      "direction_code": "SUR_NORTE",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Lechucero viernes y sábado",
+      "source_time_text": "11:30 p.m - 4:00 a.m",
+      "notes": "Horario cruza medianoche; este schema no soporta start_time > end_time.",
+      "route_seed_order": 13
+    },
+    {
+      "route_name": "Lechucero",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": null,
+      "end_time": null,
+      "is_operating": false,
+      "origin_stop": "Terminal Matellini",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Lechucero viernes y sábado",
+      "source_time_text": "11:30 p.m - 4:00 a.m",
+      "notes": "Horario cruza medianoche; este schema no soporta start_time > end_time.",
+      "route_seed_order": 13
+    },
+    {
+      "route_name": "Línea A",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea A de Lunes a sábado",
+      "source_time_text": "5:00 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 14
+    },
+    {
+      "route_name": "Línea A",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea A de Lunes a sábado",
+      "source_time_text": "5:35 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 14
+    },
+    {
+      "route_name": "Línea A",
+      "day_type_code": "DOMINGO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea A Domingo",
+      "source_time_text": "5:00 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 14
+    },
+    {
+      "route_name": "Línea A",
+      "day_type_code": "DOMINGO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea A Domingo",
+      "source_time_text": "5:35 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 14
+    },
+    {
+      "route_name": "Línea B",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea B de Lunes a sábado",
+      "source_time_text": "5:00 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 15
+    },
+    {
+      "route_name": "Línea B",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea B de Lunes a sábado",
+      "source_time_text": "5:35 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 15
+    },
+    {
+      "route_name": "Línea B",
+      "day_type_code": "DOMINGO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea B Domingo",
+      "source_time_text": "5:00 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 15
+    },
+    {
+      "route_name": "Línea B",
+      "day_type_code": "DOMINGO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea B Domingo",
+      "source_time_text": "5:35 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 15
+    },
+    {
+      "route_name": "Línea C",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea C de Lunes a sábado",
+      "source_time_text": "5:00 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 16
+    },
+    {
+      "route_name": "Línea C",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea C de Lunes a sábado",
+      "source_time_text": "5:35 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 16
+    },
+    {
+      "route_name": "Línea C",
+      "day_type_code": "DOMINGO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea C Domingo",
+      "source_time_text": "5:00 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 16
+    },
+    {
+      "route_name": "Línea C",
+      "day_type_code": "DOMINGO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea C Domingo",
+      "source_time_text": "5:35 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 16
+    },
+    {
+      "route_name": "Línea D",
+      "day_type_code": "SABADO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea D de Lunes a sábado",
+      "source_time_text": "5:00 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 17
+    },
+    {
+      "route_name": "Línea D",
+      "day_type_code": "SABADO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "23:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea D de Lunes a sábado",
+      "source_time_text": "5:35 a. m. - 11:00 p. m.",
+      "notes": null,
+      "route_seed_order": 17
+    },
+    {
+      "route_name": "Línea D",
+      "day_type_code": "DOMINGO",
+      "direction_code": "NORTE_SUR",
+      "start_time": "05:00",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Terminal Naranjal",
+      "destination_stop": "Estación Central",
+      "source_day_label": "Línea D Domingo",
+      "source_time_text": "5:00 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 17
+    },
+    {
+      "route_name": "Línea D",
+      "day_type_code": "DOMINGO",
+      "direction_code": "SUR_NORTE",
+      "start_time": "05:35",
+      "end_time": "22:00",
+      "is_operating": true,
+      "origin_stop": "Estación Central",
+      "destination_stop": "Terminal Naranjal",
+      "source_day_label": "Línea D Domingo",
+      "source_time_text": "5:35 a. m. - 10:00 p. m.",
+      "notes": null,
+      "route_seed_order": 17
+    }
+  ],
+  "extraction_notes": [
+    {
+      "route_name": "Expreso 2",
+      "source_day_label": "Expreso 2 sábado",
+      "note": "💡De sur a norte no se brindará el servicio en hora punta mañana."
+    },
+    {
+      "route_name": "Expreso 3",
+      "source_day_label": "Expreso 3 sábado",
+      "note": "💡Ruta de solo ida únicamente de sur a norte."
+    }
+  ],
+  "stats": {
+    "routes_count": 19,
+    "schedules_count": 58,
+    "notes_count": 2
+  }
+}

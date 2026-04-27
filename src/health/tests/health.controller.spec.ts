@@ -32,6 +32,7 @@ describe('HealthController', () => {
     const healthResult = {
       status: 'ok' as const,
       database: 'connected' as const,
+      kafka: 'disabled' as const,
       timestamp: new Date().toISOString(),
     };
     jest.spyOn(service, 'checkHealth').mockResolvedValue(healthResult);
@@ -52,6 +53,7 @@ describe('HealthController', () => {
     const degradedResult = {
       status: 'degraded' as const,
       database: 'disconnected' as const,
+      kafka: 'disabled' as const,
       timestamp: new Date().toISOString(),
     };
     jest.spyOn(service, 'checkHealth').mockResolvedValue(degradedResult);
@@ -69,6 +71,7 @@ describe('HealthController', () => {
     const healthResult = {
       status: 'ok' as const,
       database: 'connected' as const,
+      kafka: 'disabled' as const,
       timestamp: new Date().toISOString(),
     };
     jest.spyOn(service, 'checkHealth').mockResolvedValue(healthResult);
@@ -99,6 +102,7 @@ describe('HealthController', () => {
     const healthResult = {
       status: 'ok' as const,
       database: 'connected' as const,
+      kafka: 'disabled' as const,
       timestamp: new Date().toISOString(),
     };
     const spy = jest

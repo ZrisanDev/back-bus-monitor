@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Inject,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CreateRouteDto } from './dto/create-route.dto';
@@ -51,6 +52,16 @@ export class RoutesController {
   @ApiResponse({ status: 404, description: 'Route not found' })
   findGeoJsonByRoute(@Param('id') id: string) {
     return this.routesService.findGeoJsonByRoute(Number(id));
+  }
+
+  @Get(':id/segment/:order')
+  @ApiOperation({ summary: 'Get a single segment GeoJSON Feature by stop order' })
+  @ApiParam({ name: 'id', description: 'Route ID', type: Number })
+  @ApiParam({ name: 'order', description: 'Stop order (origin stop)', type: Number })
+  @ApiResponse({ status: 200, description: 'GeoJSON Feature with LineString geometry' })
+  @ApiResponse({ status: 404, description: 'Route not found, stop order not found, or null geometry' })
+  findSegmentByOrder(@Param('id') id: string, @Param('order') order: string) {
+    return this.routesService.findSegmentByOrder(Number(id), Number(order));
   }
 
   @Get(':id')

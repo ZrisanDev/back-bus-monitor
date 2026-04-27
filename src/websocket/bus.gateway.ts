@@ -12,6 +12,9 @@ export interface BusUpdatedPayload {
   passenger_count: number;
   occupancy_percentage: number;
   timestamp: string;
+  status: string;
+  current_stop: string;
+  next_stop: string | null;
 }
 
 @WebSocketGateway({

@@ -1,9 +1,9 @@
 import {
   IsNumber,
   Min,
-  Max,
   IsInt,
   IsOptional,
+  IsString,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -12,18 +12,6 @@ export class CreateReportDto {
   @IsNumber()
   @Min(0)
   passenger_count: number;
-
-  @ApiProperty({ example: -12.1294423, description: 'Latitude of the report' })
-  @IsNumber()
-  @Min(-90)
-  @Max(90)
-  latitude: number;
-
-  @ApiProperty({ example: -77.0228339, description: 'Longitude of the report' })
-  @IsNumber()
-  @Min(-180)
-  @Max(180)
-  longitude: number;
 
   @ApiProperty({ example: 1, description: 'Route ID', required: false })
   @IsInt()
@@ -36,4 +24,19 @@ export class CreateReportDto {
   @Min(1)
   @IsOptional()
   stop_id?: number;
+
+  @ApiProperty({ example: 'En camino a Plaza Mayor', description: 'Bus status text', required: false })
+  @IsString()
+  @IsOptional()
+  status?: string;
+
+  @ApiProperty({ example: 'Parada Central', description: 'Current stop name', required: false })
+  @IsString()
+  @IsOptional()
+  current_stop?: string;
+
+  @ApiProperty({ example: 'Plaza Mayor', description: 'Next stop name', required: false, nullable: true })
+  @IsString()
+  @IsOptional()
+  next_stop?: string | null;
 }

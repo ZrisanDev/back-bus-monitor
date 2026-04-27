@@ -19,6 +19,7 @@ describe('ReportsService', () => {
     save: jest.Mock;
     find: jest.Mock;
     query: jest.Mock;
+    findAndCount: jest.Mock;
   };
   let mockBusReader: {
     findOne: jest.Mock;
@@ -52,6 +53,11 @@ describe('ReportsService', () => {
     id: 1,
     bus_id: 1,
     passenger_count: 22,
+    latitude: -12.04,
+    longitude: -77.03,
+    status: null,
+    current_stop: null,
+    next_stop: null,
     timestamp: new Date('2025-06-15T12:00:00.000Z'),
     created_at: new Date('2025-06-15T12:00:00.000Z'),
     route_id: null,
@@ -68,6 +74,7 @@ describe('ReportsService', () => {
       save: jest.fn(),
       find: jest.fn(),
       query: jest.fn(),
+      findAndCount: jest.fn(),
     };
 
     mockBusReader = {
@@ -137,6 +144,8 @@ describe('ReportsService', () => {
   describe('create', () => {
     const dto: CreateReportDto = {
       passenger_count: 22,
+      latitude: -12.04,
+      longitude: -77.03,
     };
 
     // ── SCN: Successful creation (201) ───────────────────────────────────
@@ -164,6 +173,8 @@ describe('ReportsService', () => {
       const bus = makeBus({ id: 5, capacity: 60 });
       const differentDto: CreateReportDto = {
         passenger_count: 0,
+        latitude: -12.05,
+        longitude: -77.04,
       };
       const report = makeReport({
         bus_id: 5,
@@ -215,6 +226,8 @@ describe('ReportsService', () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const exceedDto: CreateReportDto = {
         passenger_count: 41,
+        latitude: -12.04,
+        longitude: -77.03,
       };
 
       mockBusReader.findOne.mockResolvedValue(bus);
@@ -230,6 +243,8 @@ describe('ReportsService', () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const exceedDto: CreateReportDto = {
         passenger_count: 50,
+        latitude: -12.04,
+        longitude: -77.03,
       };
 
       mockBusReader.findOne.mockResolvedValue(bus);
@@ -252,6 +267,8 @@ describe('ReportsService', () => {
       const bus = makeBus({ id: 10, capacity: 40 });
       const exceedDto: CreateReportDto = {
         passenger_count: 41,
+        latitude: -12.04,
+        longitude: -77.03,
       };
 
       mockBusReader.findOne.mockResolvedValue(bus);
@@ -492,6 +509,8 @@ describe('ReportsService', () => {
         passenger_count: 22,
         route_id: 5,
         stop_id: 15,
+        latitude: -12.04,
+        longitude: -77.03,
       };
       const report = makeReport({
         bus_id: 10,
@@ -525,6 +544,8 @@ describe('ReportsService', () => {
       const bus = makeBus({ id: 1, capacity: 40 });
       const dtoLegacy: CreateReportDto = {
         passenger_count: 15,
+        latitude: -12.04,
+        longitude: -77.03,
       };
       const report = makeReport({
         bus_id: 1,
@@ -552,6 +573,8 @@ describe('ReportsService', () => {
         passenger_count: 10,
         route_id: 99,
         stop_id: 200,
+        latitude: -12.04,
+        longitude: -77.03,
       };
       const report = makeReport({
         bus_id: 3,

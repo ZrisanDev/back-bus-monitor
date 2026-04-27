@@ -79,7 +79,6 @@ export class RoutesService implements IRoutesService {
       latitude: rs.stop.latitude,
       longitude: rs.stop.longitude,
       stop_order: rs.stop_order,
-      direction_id: rs.direction_id,
     }));
   }
 
@@ -97,12 +96,31 @@ export class RoutesService implements IRoutesService {
 
     const features: any[] = [];
 
-    // LineString feature from ordered stop coordinates
-    if (routeStops.length > 0) {
-      const lineCoordinates = routeStops.map((rs: any) => [
-        Number(rs.stop.longitude),
-        Number(rs.stop.latitude),
-      ]);
+    // LineString feature from concatenated segment geometries
+    const segmentsWithGeometry = routeStops.filter(
+      (rs: any) => rs.segment_geometry !== null,
+    );
+
+    if (segmentsWithGeometry.length > 0) {
+      const concatenatedCoords: number[][] = [];
+      for (const rs of segmentsWithGeometry) {
+        const coords: number[][] = rs.segment_geometry!.coordinates;
+        if (concatenatedCoords.length === 0) {
+          concatenatedCoords.push(...coords);
+        } else {
+          // Deduplicate junction point (last of previous == first of current)
+          const lastCoord = concatenatedCoords[concatenatedCoords.length - 1];
+          const firstCoord = coords[0];
+          if (
+            lastCoord[0] === firstCoord[0] &&
+            lastCoord[1] === firstCoord[1]
+          ) {
+            concatenatedCoords.push(...coords.slice(1));
+          } else {
+            concatenatedCoords.push(...coords);
+          }
+        }
+      }
 
       features.push({
         type: 'Feature',
@@ -112,30 +130,71 @@ export class RoutesService implements IRoutesService {
         },
         geometry: {
           type: 'LineString',
-          coordinates: lineCoordinates,
+          coordinates: concatenatedCoords,
         },
       });
+    }
 
-      // Point features for each stop
-      for (const rs of routeStops) {
-        features.push({
-          type: 'Feature',
-          properties: {
-            stop_id: rs.stop.id,
-            name: rs.stop.name,
-            stop_order: rs.stop_order,
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [Number(rs.stop.longitude), Number(rs.stop.latitude)],
-          },
-        });
-      }
+    // Point features for each stop
+    for (const rs of routeStops) {
+      features.push({
+        type: 'Feature',
+        properties: {
+          stop_id: rs.stop.id,
+          stop_name: rs.stop.name,
+          order: rs.stop_order,
+        },
+        geometry: {
+          type: 'Point',
+          coordinates: [Number(rs.stop.longitude), Number(rs.stop.latitude)],
+        },
+      });
     }
 
     return {
       type: 'FeatureCollection',
       features,
+    };
+  }
+
+  async findSegmentByOrder(routeId: number, order: number): Promise<any> {
+    const route = await this.routeRepository.findOneBy({ id: routeId });
+    if (!route) {
+      throw new NotFoundException(`Ruta con ID ${routeId} no encontrada`);
+    }
+
+    const routeStops = await this.routeStopRepository.find({
+      where: { route_id: routeId },
+      relations: ['stop'],
+      order: { stop_order: 'ASC' },
+    });
+
+    const targetStop = routeStops.find((rs: any) => rs.stop_order === order);
+    if (!targetStop) {
+      throw new NotFoundException(
+        `Stop order ${order} no encontrado para la ruta ${routeId}`,
+      );
+    }
+
+    if (!targetStop.segment_geometry) {
+      throw new NotFoundException(
+        `Segment geometry no disponible para stop order ${order} en ruta ${routeId}`,
+      );
+    }
+
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'LineString',
+        coordinates: targetStop.segment_geometry.coordinates,
+      },
+      properties: {
+        route_id: route.id,
+        route_name: route.name,
+        stop_id: targetStop.stop.id,
+        stop_name: targetStop.stop.name,
+        order: targetStop.stop_order,
+      },
     };
   }
 }
